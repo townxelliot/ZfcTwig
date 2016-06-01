@@ -2,24 +2,26 @@
 
 namespace ZfcTwig\Twig;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use ZfcTwig\ModuleOptions;
 
 class MapLoaderFactory implements FactoryInterface
 {
     /**
-     * Create service
-     *
-     * @param ServiceLocatorInterface $serviceLocator
+     * @param ContainerInterface $container
+     * @param string $requestedName
+     * @param array|null $options
      * @return MapLoader
+     * @throws \Twig_Error_Loader
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        /** @var \ZfcTwig\moduleOptions $options */
-        $options = $serviceLocator->get('ZfcTwig\ModuleOptions');
+        /** @var ModuleOptions $options */
+        $options = $container->get(ModuleOptions::class);
 
         /** @var \Zend\View\Resolver\TemplateMapResolver */
-        $zfTemplateMap = $serviceLocator->get('ViewTemplateMapResolver');
+        $zfTemplateMap = $container->get('ViewTemplateMapResolver');
 
         $templateMap = new MapLoader();
         foreach ($zfTemplateMap as $name => $path) {

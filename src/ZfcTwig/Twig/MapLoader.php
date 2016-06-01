@@ -12,7 +12,7 @@ class MapLoader implements Twig_ExistsLoaderInterface, Twig_LoaderInterface
      * Array of templates to filenames.
      * @var array
      */
-    protected $map = array();
+    protected $map = [];
 
     /**
      * Add to the map.

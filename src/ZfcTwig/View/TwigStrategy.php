@@ -9,9 +9,9 @@ use Zend\View\ViewEvent;
 class TwigStrategy implements ListenerAggregateInterface
 {
     /**
-     * @var \Zend\Stdlib\CallbackHandler[]
+     * @var callable[]
      */
-    protected $listeners = array();
+    protected $listeners = [];
 
     /**
      * @var TwigRenderer
@@ -37,8 +37,8 @@ class TwigStrategy implements ListenerAggregateInterface
      */
     public function attach(EventManagerInterface $events, $priority = 100)
     {
-        $this->listeners[] = $events->attach(ViewEvent::EVENT_RENDERER, array($this, 'selectRenderer'), $priority);
-        $this->listeners[] = $events->attach(ViewEvent::EVENT_RESPONSE, array($this, 'injectResponse'), $priority);
+        $this->listeners[] = $events->attach(ViewEvent::EVENT_RENDERER, [$this, 'selectRenderer'], $priority);
+        $this->listeners[] = $events->attach(ViewEvent::EVENT_RESPONSE, [$this, 'injectResponse'], $priority);
     }
 
     /**

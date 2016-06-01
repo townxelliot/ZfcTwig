@@ -1,30 +1,35 @@
 <?php
 
-return array(
-    'aliases' => array(
-        'ZfcTwigExtension'               => 'ZfcTwig\Twig\Extension',
+use ZfcTwig\ModuleOptions;
+use ZfcTwig\ModuleOptionsFactory;
+use ZfcTwig\Twig;
+use ZfcTwig\View;
+
+return [
+    'aliases' => [
+        'ZfcTwigExtension'               => Twig\Extension::class,
         'ZfcTwigLoaderChain'             => 'Twig_Loader_Chain',
-        'ZfcTwigLoaderTemplateMap'       => 'ZfcTwig\Twig\MapLoader',
-        'ZfcTwigLoaderTemplatePathStack' => 'ZfcTwig\Twig\StackLoader',
-        'ZfcTwigRenderer'                => 'ZfcTwig\View\TwigRenderer',
-        'ZfcTwigResolver'                => 'ZfcTwig\View\TwigResolver',
-        'ZfcTwigViewHelperManager'       => 'ZfcTwig\View\HelperPluginManager',
-        'ZfcTwigViewStrategy'            => 'ZfcTwig\View\TwigStrategy',
-    ),
+        'ZfcTwigLoaderTemplateMap'       => Twig\MapLoader::class,
+        'ZfcTwigLoaderTemplatePathStack' => Twig\StackLoader::class,
+        'ZfcTwigRenderer'                => View\TwigRenderer::class,
+        'ZfcTwigResolver'                => View\TwigResolver::class,
+        'ZfcTwigViewHelperManager'       => View\HelperPluginManager::class,
+        'ZfcTwigViewStrategy'            => View\TwigStrategy::class,
+    ],
 
-    'factories' => array(
-        'Twig_Environment'  => 'ZfcTwig\Twig\EnvironmentFactory',
-        'Twig_Loader_Chain' => 'ZfcTwig\Twig\ChainLoaderFactory',
+    'factories' => [
+        'Twig_Environment'  => Twig\EnvironmentFactory::class,
+        'Twig_Loader_Chain' => Twig\ChainLoaderFactory::class,
 
-        'ZfcTwig\Twig\Extension' => 'ZfcTwig\Twig\ExtensionFactory',
-        'ZfcTwig\Twig\MapLoader' => 'ZfcTwig\Twig\MapLoaderFactory',
+        Twig\Extension::class => Twig\ExtensionFactory::class,
+        Twig\MapLoader::class => Twig\MapLoaderFactory::class,
 
-        'ZfcTwig\Twig\StackLoader'         => 'ZfcTwig\Twig\StackLoaderFactory',
-        'ZfcTwig\View\TwigRenderer'        => 'ZfcTwig\View\TwigRendererFactory',
-        'ZfcTwig\View\TwigResolver'        => 'ZfcTwig\View\TwigResolverFactory',
-        'ZfcTwig\View\HelperPluginManager' => 'ZfcTwig\View\HelperPluginManagerFactory',
-        'ZfcTwig\View\TwigStrategy'        => 'ZfcTwig\View\TwigStrategyFactory',
+        Twig\StackLoader::class         => Twig\StackLoaderFactory::class,
+        View\TwigRenderer::class        => View\TwigRendererFactory::class,
+        View\TwigResolver::class        => View\TwigResolverFactory::class,
+        View\HelperPluginManager::class => View\HelperPluginManagerFactory::class,
+        View\TwigStrategy::class        => View\TwigStrategyFactory::class,
 
-        'ZfcTwig\ModuleOptions' => 'ZfcTwig\ModuleOptionsFactory'
-    )
-);
+        ModuleOptions::class => ModuleOptionsFactory::class
+    ]
+];

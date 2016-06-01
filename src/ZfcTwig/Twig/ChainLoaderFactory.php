@@ -2,33 +2,33 @@
 
 namespace ZfcTwig\Twig;
 
+use Interop\Container\ContainerInterface;
 use InvalidArgumentException;
 use Twig_Loader_Chain;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use ZfcTwig\ModuleOptions;
 
 class ChainLoaderFactory implements FactoryInterface
 {
     /**
-     * Create service
-     *
-     * @param ServiceLocatorInterface $serviceLocator
-     * @throws \InvalidArgumentException
+     * @param ContainerInterface $container
+     * @param string $requestedName
+     * @param array|null $options
      * @return Twig_Loader_Chain
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        /** @var \ZfcTwig\moduleOptions $options */
-        $options = $serviceLocator->get('ZfcTwig\ModuleOptions');
+        /** @var ModuleOptions $options */
+        $options = $container->get(ModuleOptions::class);
 
         // Setup loader
         $chain = new Twig_Loader_Chain();
 
         foreach ($options->getLoaderChain() as $loader) {
-            if (!is_string($loader) || !$serviceLocator->has($loader)) {
+            if (!is_string($loader) || !$container->has($loader)) {
                 throw new InvalidArgumentException('Loaders should be a service manager alias.');
             }
-            $chain->addLoader($serviceLocator->get($loader));
+            $chain->addLoader($container->get($loader));
         }
 
         return $chain;

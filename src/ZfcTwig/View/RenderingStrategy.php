@@ -18,9 +18,9 @@ use Zend\View\Model\ViewModel;
 class RenderingStrategy implements ListenerAggregateInterface
 {
     /**
-     * @var \Zend\Stdlib\CallbackHandler[]
+     * @var callable[]
      */
-    protected $listeners = array();
+    protected $listeners = [];
 
     /**
      * @var Twig_Environment
@@ -34,10 +34,11 @@ class RenderingStrategy implements ListenerAggregateInterface
      * implementation will pass this to the aggregate.
      *
      * @param EventManagerInterface $events
+     * @param int $priority
      */
-    public function attach(EventManagerInterface $events)
+    public function attach(EventManagerInterface $events, $priority = 1)
     {
-        $this->listeners[] = $events->attach(MvcEvent::EVENT_RENDER, array($this, 'render'), -999);
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_RENDER, [$this, 'render'], -999);
     }
 
     /**

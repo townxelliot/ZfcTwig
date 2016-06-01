@@ -2,29 +2,31 @@
 
 namespace ZfcTwig\Twig;
 
+use Interop\Container\ContainerInterface;
 use RuntimeException;
 use Twig_Environment;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use ZfcTwig\ModuleOptions;
 
 class EnvironmentFactory implements FactoryInterface
 {
     /**
-     * @param ServiceLocatorInterface $serviceLocator
-     * @return \Twig_Environment
-     * @throws \RuntimeException
+     * @param ContainerInterface $container
+     * @param string $requestedName
+     * @param array|null $options
+     * @return Twig_Environment
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        /** @var \ZfcTwig\moduleOptions $options */
-        $options  = $serviceLocator->get('ZfcTwig\ModuleOptions');
+        /** @var ModuleOptions $options */
+        $options  = $container->get(ModuleOptions::class);
         $envClass = $options->getEnvironmentClass();
 
         /** @var \Twig_Environment $env */
         $env = new $envClass(null, $options->getEnvironmentOptions());
 
         if ($options->getEnableFallbackFunctions()) {
-            $helperPluginManager = $serviceLocator->get('ViewHelperManager');
+            $helperPluginManager = $container->get('ViewHelperManager');
             $env->registerUndefinedFunctionCallback(
                 function ($name) use ($helperPluginManager) {
                     if ($helperPluginManager->has($name)) {
@@ -35,7 +37,7 @@ class EnvironmentFactory implements FactoryInterface
             );
         }
 
-        if (!$serviceLocator->has($options->getEnvironmentLoader())) {
+        if (!$container->has($options->getEnvironmentLoader())) {
             throw new RuntimeException(
                 sprintf(
                     'Loader with alias "%s" could not be found!',
@@ -44,7 +46,7 @@ class EnvironmentFactory implements FactoryInterface
             );
         }
 
-        $env->setLoader($serviceLocator->get($options->getEnvironmentLoader()));
+        $env->setLoader($container->get($options->getEnvironmentLoader()));
 
         foreach ($options->getGlobals() as $name => $value) {
             $env->addGlobal($name, $value);

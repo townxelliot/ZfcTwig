@@ -2,31 +2,33 @@
 
 namespace ZfcTwig\View;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Zend\View\View;
+use ZfcTwig\ModuleOptions;
 
 class TwigRendererFactory implements FactoryInterface
 {
     /**
-     * Create service
-     *
-     * @param ServiceLocatorInterface $serviceLocator
+     * @param ContainerInterface $container
+     * @param string $requestedName
+     * @param array|null $options
      * @return TwigRenderer
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        /** @var \ZfcTwig\moduleOptions $options */
-        $options = $serviceLocator->get('ZfcTwig\ModuleOptions');
+        /** @var ModuleOptions $options */
+        $options = $container->get(ModuleOptions::class);
 
         $renderer = new TwigRenderer(
-            $serviceLocator->get('Zend\View\View'),
-            $serviceLocator->get('Twig_Loader_Chain'),
-            $serviceLocator->get('Twig_Environment'),
-            $serviceLocator->get('ZfcTwig\View\TwigResolver')
+            $container->get(View::class),
+            $container->get('Twig_Loader_Chain'),
+            $container->get('Twig_Environment'),
+            $container->get(TwigResolver::class)
         );
 
         $renderer->setCanRenderTrees($options->getDisableZfmodel());
-        $renderer->setHelperPluginManager($serviceLocator->get('ZfcTwigViewHelperManager'));
+        $renderer->setHelperPluginManager($container->get(HelperPluginManager::class));
 
         return $renderer;
     }

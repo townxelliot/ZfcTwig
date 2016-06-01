@@ -2,22 +2,21 @@
 
 namespace ZfcTwig;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 
 class ModuleOptionsFactory implements FactoryInterface
 {
-
     /**
-     * Create service
-     *
-     * @param ServiceLocatorInterface $serviceLocator
-     * @return mixed
+     * @param ContainerInterface $container
+     * @param string $requestedName
+     * @param array|null $options
+     * @return ModuleOptions
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $config = $serviceLocator->get('Configuration');
+        $config = $container->get('Configuration');
 
-        return new ModuleOptions(isset($config['zfctwig']) ? $config['zfctwig'] : array());
+        return new ModuleOptions(isset($config['zfctwig']) ? $config['zfctwig'] : []);
     }
 }

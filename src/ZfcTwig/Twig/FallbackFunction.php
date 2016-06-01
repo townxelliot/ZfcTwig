@@ -16,7 +16,7 @@ class FallbackFunction extends Twig_Function
     {
         $this->helper = $helper;
 
-        parent::__construct(array('is_safe' => array('all')));
+        parent::__construct(['is_safe' => ['all']]);
     }
 
     /**

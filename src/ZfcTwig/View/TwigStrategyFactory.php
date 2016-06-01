@@ -2,20 +2,19 @@
 
 namespace ZfcTwig\View;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 
 class TwigStrategyFactory implements FactoryInterface
 {
-
     /**
-     * Create service
-     *
-     * @param ServiceLocatorInterface $serviceLocator
+     * @param ContainerInterface $container
+     * @param string $requestedName
+     * @param array|null $options
      * @return TwigStrategy
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        return new TwigStrategy($serviceLocator->get('ZfcTwigRenderer'));
+        return new TwigStrategy($container->get(TwigRenderer::class));
     }
 }

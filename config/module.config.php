@@ -1,6 +1,11 @@
 <?php
-return array(
-    'zfctwig' => array(
+
+use Zend\Navigation\View\HelperConfig;
+use ZfcTwig\Twig;
+use ZfcTwig\View;
+
+return [
+    'zfctwig' => [
         /**
          * Service manager alias of the loader to use with ZfcTwig. By default, it uses
          * the included ZfcTwigLoaderChain which includes a copy of ZF2's TemplateMap and
@@ -16,25 +21,25 @@ return array(
         /**
          * Options that are passed directly to the Twig_Environment.
          */
-        'environment_options' => array(),
+        'environment_options' => [],
 
         /**
          * Service manager alias of any additional loaders to register with the chain. The default
          * has the TemplateMap and TemplatePathStack registered. This setting only has an effect
          * if the `environment_loader` key above is set to ZfcTwigLoaderChain.
          */
-        'loader_chain' => array(
-            'ZfcTwigLoaderTemplateMap',
-            'ZfcTwigLoaderTemplatePathStack'
-        ),
+        'loader_chain' => [
+            Twig\MapLoader::class,
+            Twig\StackLoader::class
+        ],
 
         /**
          * Service manager alias or fully qualified domain name of extensions. ZfcTwigExtension
          * is required for this module to function!
          */
-        'extensions' => array(
-            'zfctwig' => 'ZfcTwigExtension'
-        ),
+        'extensions' => [
+            'zfctwig' => Twig\Extension::class
+        ],
 
         /**
          * The suffix of Twig files. Technically, Twig can load *any* type of file
@@ -60,12 +65,12 @@ return array(
          * any view helpers in this array that require access to the renderer. The defaults from ZF2 (navigation,
          * partial, etc.) are done for you.
          */
-        'helper_manager' => array(
-            'configs' => array(
-                'Zend\Navigation\View\HelperConfig'
-            )
-        )
-    ),
+        'helper_manager' => [
+            'configs' => [
+                HelperConfig::class
+            ]
+        ]
+    ],
 
     /**
      * Load services.
@@ -75,7 +80,7 @@ return array(
     /**
      * Register the view strategy with the view manager. This is required!
      */
-    'view_manager' => array(
-        'strategies' => array('ZfcTwigViewStrategy')
-    )
-);
+    'view_manager' => [
+        'strategies' => [View\TwigStrategy::class]
+    ]
+];

@@ -2,24 +2,25 @@
 
 namespace ZfcTwig\Twig;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use ZfcTwig\ModuleOptions;
 
 class StackLoaderFactory implements FactoryInterface
 {
     /**
-     * Create service
-     *
-     * @param ServiceLocatorInterface $serviceLocator
-     * @return mixed
+     * @param ContainerInterface $container
+     * @param string $requestedName
+     * @param array|null $options
+     * @return \Zend\View\Resolver\TemplatePathStack
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        /** @var \ZfcTwig\moduleOptions $options */
-        $options = $serviceLocator->get('ZfcTwig\ModuleOptions');
+        /** @var ModuleOptions $options */
+        $options = $container->get(ModuleOptions::class);
 
         /** @var $templateStack \Zend\View\Resolver\TemplatePathStack */
-        $zfTemplateStack = $serviceLocator->get('ViewTemplatePathStack');
+        $zfTemplateStack = $container->get('ViewTemplatePathStack');
 
         $templateStack = new StackLoader($zfTemplateStack->getPaths()->toArray());
         $templateStack->setDefaultSuffix($options->getSuffix());

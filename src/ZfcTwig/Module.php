@@ -18,15 +18,15 @@ class Module implements
         $serviceManager = $application->getServiceManager();
         $environment    = $serviceManager->get('Twig_Environment');
 
-        /** @var \ZfcTwig\moduleOptions $options */
-        $options = $serviceManager->get('ZfcTwig\ModuleOptions');
+        /** @var ModuleOptions $options */
+        $options = $serviceManager->get(ModuleOptions::class);
 
         // Setup extensions
         foreach ($options->getExtensions() as $extension) {
 	    // Allows modules to override/remove extensions.
 	    if (empty($extension)) {
 	        continue;
-	    } else if (is_string($extension)) {
+	    } elseif (is_string($extension)) {
                 if ($serviceManager->has($extension)) {
                     $extension = $serviceManager->get($extension);
                 } else {
@@ -40,6 +40,9 @@ class Module implements
         }
     }
 
+    /**
+     * @return array
+     */
     public function getConfig()
     {
         return include __DIR__ . '/../../config/module.config.php';

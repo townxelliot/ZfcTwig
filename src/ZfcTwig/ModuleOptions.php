@@ -19,22 +19,22 @@ class ModuleOptions extends AbstractOptions
     /**
      * @var array
      */
-    protected $environmentOptions = array();
+    protected $environmentOptions = [];
 
     /**
      * @var array
      */
-    protected $globals = array();
+    protected $globals = [];
 
     /**
      * @var array
      */
-    protected $loaderChain = array();
+    protected $loaderChain = [];
 
     /**
      * @var array
      */
-    protected $extensions = array();
+    protected $extensions = [];
 
     /**
      * @var string
@@ -54,7 +54,7 @@ class ModuleOptions extends AbstractOptions
     /**
      * @var array
      */
-    protected $helperManager = array();
+    protected $helperManager = [];
 
     /**
      * @param boolean $disableZfmodel

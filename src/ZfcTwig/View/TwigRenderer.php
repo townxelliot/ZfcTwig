@@ -47,7 +47,7 @@ class TwigRenderer implements RendererInterface, TreeRendererInterface
     /**
      * @var array Cache for the plugin call
      */
-    private $__pluginCache = array();
+    private $__pluginCache = [];
 
     /**
      * @param View $view
@@ -188,7 +188,7 @@ class TwigRenderer implements RendererInterface, TreeRendererInterface
      * @return string|null The script output.
      * @throws \Zend\View\Exception\DomainException
      */
-    public function render($nameOrModel, $values = array())
+    public function render($nameOrModel, $values = [])
     {
         $model = null;
 

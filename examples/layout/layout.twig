@@ -46,7 +46,7 @@
             {% block content %}{{ content|raw }}{% endblock content %}
             <hr>
             <footer>
-                <p>&copy; 2005 - 2014 by Zend Technologies Ltd. {{ translate('All rights reserved.') }}</p>
+                <p>&copy; 2005 - {{ "now"|date('Y') }} by Zend Technologies Ltd. {{ translate('All rights reserved.') }}</p>
             </footer>
         </div> <!-- /container -->
         {% block inline %}{% endblock inline %}

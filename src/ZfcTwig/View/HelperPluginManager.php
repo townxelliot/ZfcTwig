@@ -2,32 +2,43 @@
 
 namespace ZfcTwig\View;
 
+use Zend\ServiceManager\Factory\InvokableFactory;
+use Zend\View\Helper;
 use Zend\View\HelperPluginManager as ZendHelperPluginManager;
 
 class HelperPluginManager extends ZendHelperPluginManager
 {
     /**
-     * Default set of helpers factories
+     * Default aliases
      *
-     * @var array
+     * @var string[]
      */
-    protected $factories = array(
-        'flashmessenger' => 'Zend\View\Helper\Service\FlashMessengerFactory',
-    );
+    protected $aliases = [
+        'flashmessenger' => Helper\FlashMessenger::class,
+        'declarevars' => Helper\DeclareVars::class,
+        'htmlflash' => Helper\HtmlFlash::class,
+        'htmllist' => Helper\HtmlList::class,
+        'htmlobject' => Helper\HtmlObject::class,
+        'htmlpage' => Helper\HtmlPage::class,
+        'htmlquicktime' => Helper\HtmlQuicktime::class,
+        'layout' => Helper\Layout::class,
+        'renderchildmodel' => Helper\RenderChildModel::class,
+    ];
 
     /**
-     * Default set of helpers
+     * Default factories
      *
-     * @var array
+     * @var string[]
      */
-    protected $invokableClasses = array(
-        'declarevars'      => 'Zend\View\Helper\DeclareVars',
-        'htmlflash'        => 'Zend\View\Helper\HtmlFlash',
-        'htmllist'         => 'Zend\View\Helper\HtmlList',
-        'htmlobject'       => 'Zend\View\Helper\HtmlObject',
-        'htmlpage'         => 'Zend\View\Helper\HtmlPage',
-        'htmlquicktime'    => 'Zend\View\Helper\HtmlQuicktime',
-        'layout'           => 'Zend\View\Helper\Layout',
-        'renderchildmodel' => 'Zend\View\Helper\RenderChildModel',
-    );
+    protected $factories = [
+        Helper\FlashMessenger::class => Helper\Service\FlashMessengerFactory::class,
+        Helper\DeclareVars::class => InvokableFactory::class,
+        Helper\HtmlFlash::class => InvokableFactory::class,
+        Helper\HtmlList::class => InvokableFactory::class,
+        Helper\HtmlObject::class => InvokableFactory::class,
+        Helper\HtmlPage::class => InvokableFactory::class,
+        Helper\HtmlQuicktime::class => InvokableFactory::class,
+        Helper\Layout::class => InvokableFactory::class,
+        Helper\RenderChildModel::class => InvokableFactory::class,
+    ];
 }

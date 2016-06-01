@@ -2,34 +2,29 @@
 
 namespace ZfcTwig\View;
 
+use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Config;
 use Zend\ServiceManager\ConfigInterface;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\ServiceManager\ServiceManager;
+use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\View\Exception;
+use ZfcTwig\ModuleOptions;
 
 class HelperPluginManagerFactory implements FactoryInterface
 {
-
     /**
-     * Create service
-     *
-     * @param ServiceLocatorInterface $serviceLocator
-     * @throws \Zend\View\Exception\RuntimeException
-     * @return mixed
+     * @param ContainerInterface $container
+     * @param string $requestedName
+     * @param array|null $options
+     * @return HelperPluginManager
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        /** @var \ZfcTwig\moduleOptions $options */
-        $options        = $serviceLocator->get('ZfcTwig\ModuleOptions');
+        /** @var ModuleOptions $options */
+        $options        = $container->get(ModuleOptions::class);
         $managerOptions = $options->getHelperManager();
-        $managerConfigs = isset($managerOptions['configs']) ? $managerOptions['configs'] : array();
+        $managerConfigs = isset($managerOptions['configs']) ? $managerOptions['configs'] : [];
 
-        $baseManager = $serviceLocator->get('ViewHelperManager');
-        $twigManager = new HelperPluginManager(new Config($managerOptions));
-        $twigManager->setServiceLocator($serviceLocator);
-        $twigManager->addPeeringServiceManager($baseManager);
+        $twigManager = new HelperPluginManager($container, new Config($managerOptions));
 
         foreach ($managerConfigs as $configClass) {
             if (is_string($configClass) && class_exists($configClass)) {

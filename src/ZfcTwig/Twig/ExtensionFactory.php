@@ -2,19 +2,20 @@
 
 namespace ZfcTwig\Twig;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use ZfcTwig\View\TwigRenderer;
 
 class ExtensionFactory implements FactoryInterface
 {
     /**
-     * Create service
-     *
-     * @param ServiceLocatorInterface $serviceLocator
-     * @return mixed
+     * @param ContainerInterface $container
+     * @param string $requestedName
+     * @param array|null $options
+     * @return Extension
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        return new Extension($serviceLocator->get('ZfcTwigRenderer'));
+        return new Extension($container->get(TwigRenderer::class));
     }
 }

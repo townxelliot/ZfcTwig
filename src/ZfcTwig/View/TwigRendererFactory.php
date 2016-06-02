@@ -28,7 +28,7 @@ class TwigRendererFactory implements FactoryInterface
         );
 
         $renderer->setCanRenderTrees($options->getDisableZfmodel());
-        $renderer->setHelperPluginManager($container->get(HelperPluginManager::class));
+        $renderer->setHelperPluginManager($container->get('ZfcTwig_ViewHelperManager'));
 
         return $renderer;
     }

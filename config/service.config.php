@@ -13,7 +13,7 @@ return [
         'ZfcTwigLoaderTemplatePathStack' => Twig\StackLoader::class,
         'ZfcTwigRenderer'                => View\TwigRenderer::class,
         'ZfcTwigResolver'                => View\TwigResolver::class,
-        'ZfcTwigViewHelperManager'       => View\HelperPluginManager::class,
+        'ZfcTwigViewHelperManager'       => 'ZfcTwig_ViewHelperManager',
         'ZfcTwigViewStrategy'            => View\TwigStrategy::class,
     ],
 
@@ -24,11 +24,11 @@ return [
         Twig\Extension::class => Twig\ExtensionFactory::class,
         Twig\MapLoader::class => Twig\MapLoaderFactory::class,
 
-        Twig\StackLoader::class         => Twig\StackLoaderFactory::class,
-        View\TwigRenderer::class        => View\TwigRendererFactory::class,
-        View\TwigResolver::class        => View\TwigResolverFactory::class,
-        View\HelperPluginManager::class => View\HelperPluginManagerFactory::class,
-        View\TwigStrategy::class        => View\TwigStrategyFactory::class,
+        Twig\StackLoader::class     => Twig\StackLoaderFactory::class,
+        View\TwigRenderer::class    => View\TwigRendererFactory::class,
+        View\TwigResolver::class    => View\TwigResolverFactory::class,
+        'ZfcTwig_ViewHelperManager' => View\HelperPluginManagerFactory::class,
+        View\TwigStrategy::class    => View\TwigStrategyFactory::class,
 
         ModuleOptions::class => ModuleOptionsFactory::class
     ]

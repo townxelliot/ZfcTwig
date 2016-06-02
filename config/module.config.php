@@ -75,7 +75,7 @@ return [
     /**
      * Load services.
      */
-    'service_manager' => include 'service.config.php',
+    'service_manager' => include __DIR__ . '/service.config.php',
 
     /**
      * Register the view strategy with the view manager. This is required!

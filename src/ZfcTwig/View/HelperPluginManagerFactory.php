@@ -3,10 +3,10 @@
 namespace ZfcTwig\View;
 
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Config;
 use Zend\ServiceManager\ConfigInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\View\Exception;
+use Zend\View\HelperPluginManager;
 use ZfcTwig\ModuleOptions;
 
 class HelperPluginManagerFactory implements FactoryInterface
@@ -24,10 +24,12 @@ class HelperPluginManagerFactory implements FactoryInterface
         $managerOptions = $options->getHelperManager();
         $managerConfigs = isset($managerOptions['configs']) ? $managerOptions['configs'] : [];
 
-        $twigManager = new HelperPluginManager($container, new Config($managerOptions));
+        /** @var HelperPluginManager $viewHelper */
+        $viewHelper = $container->get('ViewHelperManager');
 
         foreach ($managerConfigs as $configClass) {
             if (is_string($configClass) && class_exists($configClass)) {
+                /** @var ConfigInterface $config */
                 $config = new $configClass;
 
                 if (!$config instanceof ConfigInterface) {
@@ -41,10 +43,10 @@ class HelperPluginManagerFactory implements FactoryInterface
                     );
                 }
 
-                $config->configureServiceManager($twigManager);
+                $config->configureServiceManager($viewHelper);
             }
         }
 
-        return $twigManager;
+        return $viewHelper;
     }
 }

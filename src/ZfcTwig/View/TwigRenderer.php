@@ -30,6 +30,11 @@ class TwigRenderer implements RendererInterface, TreeRendererInterface
     protected $helperPluginManager;
 
     /**
+     * @var HelperPluginManager
+     */
+    protected $zendHelperPluginManager;
+
+    /**
      * @var Twig_Loader_Chain
      */
     protected $loader;
@@ -118,9 +123,14 @@ class TwigRenderer implements RendererInterface, TreeRendererInterface
      */
     public function plugin($name, array $options = null)
     {
-        return $this->getHelperPluginManager()
-                    ->setRenderer($this)
-                    ->get($name, $options);
+        $helper = $this->getHelperPluginManager()
+                    ->setRenderer($this);
+
+        if ($helper->has($name)) {
+            return $helper->get($name, $options);
+        }
+
+        return $this->getZendHelperPluginManager()->get($name, $options);
     }
 
     /**
@@ -178,6 +188,24 @@ class TwigRenderer implements RendererInterface, TreeRendererInterface
     public function getHelperPluginManager()
     {
         return $this->helperPluginManager;
+    }
+
+    /**
+     * @return HelperPluginManager
+     */
+    public function getZendHelperPluginManager()
+    {
+        return $this->zendHelperPluginManager;
+    }
+
+    /**
+     * @param HelperPluginManager $zendHelperPluginManager
+     * @return self
+     */
+    public function setZendHelperPluginManager($zendHelperPluginManager)
+    {
+        $this->zendHelperPluginManager = $zendHelperPluginManager;
+        return $this;
     }
 
     /**

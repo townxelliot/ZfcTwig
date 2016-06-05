@@ -28,7 +28,7 @@ class TwigStrategyTest extends TestCase
     public function testSelectRendererWhenTemplateFound()
     {
         /** @var \PHPUnit_Framework_MockObject_MockObject|ModelInterface $model */
-        $model = $this->getMock(ModelInterface::class);
+        $model = $this->getMockBuilder(ModelInterface::class)->getMock();
         $model->expects($this->at(0))
               ->method('getTemplate')
               ->will($this->returnValue('key1'));

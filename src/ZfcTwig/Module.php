@@ -11,6 +11,11 @@ class Module implements
     BootstrapListenerInterface,
     ConfigProviderInterface
 {
+    /**
+     * @param EventInterface $e
+     * @throws InvalidArgumentException
+     * @return array
+     */
     public function onBootstrap(EventInterface $e)
     {
         /** @var \Zend\Mvc\MvcEvent $e*/
@@ -23,10 +28,10 @@ class Module implements
 
         // Setup extensions
         foreach ($options->getExtensions() as $extension) {
-	    // Allows modules to override/remove extensions.
-	    if (empty($extension)) {
-	        continue;
-	    } elseif (is_string($extension)) {
+            // Allows modules to override/remove extensions.
+            if (empty($extension)) {
+                continue;
+            } elseif (is_string($extension)) {
                 if ($serviceManager->has($extension)) {
                     $extension = $serviceManager->get($extension);
                 } else {

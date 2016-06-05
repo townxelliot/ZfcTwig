@@ -6,7 +6,6 @@ use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\ConfigInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\View\Exception;
-use Zend\View\HelperPluginManager;
 use ZfcTwig\ModuleOptions;
 
 class HelperPluginManagerFactory implements FactoryInterface
@@ -25,7 +24,8 @@ class HelperPluginManagerFactory implements FactoryInterface
         $managerConfigs = isset($managerOptions['configs']) ? $managerOptions['configs'] : [];
 
         /** @var HelperPluginManager $viewHelper */
-        $viewHelper = $container->get('ViewHelperManager');
+        //$viewHelper = $container->get('ViewHelperManager');
+        $viewHelper = new HelperPluginManager($container, $managerOptions);
 
         foreach ($managerConfigs as $configClass) {
             if (is_string($configClass) && class_exists($configClass)) {
@@ -38,7 +38,7 @@ class HelperPluginManagerFactory implements FactoryInterface
                             'Invalid service manager configuration class provided; received "%s",
                                 expected class implementing %s',
                             $configClass,
-                            'Zend\ServiceManager\ConfigInterface'
+                            ConfigInterface::class
                         )
                     );
                 }

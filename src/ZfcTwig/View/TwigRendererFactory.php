@@ -3,7 +3,8 @@
 namespace ZfcTwig\View;
 
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\View\View;
 use ZfcTwig\ModuleOptions;
 
@@ -33,4 +34,15 @@ class TwigRendererFactory implements FactoryInterface
 
         return $renderer;
     }
+
+    /**
+     * @param ServiceLocatorInterface $serviceLocator
+     * @return TwigRenderer
+     */
+    public function createService(ServiceLocatorInterface $serviceLocator)
+    {
+        return $this($serviceLocator, TwigRenderer::class);
+    }
+
+
 }

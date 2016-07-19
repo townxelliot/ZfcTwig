@@ -5,7 +5,8 @@ namespace ZfcTwig\Twig;
 use Interop\Container\ContainerInterface;
 use RuntimeException;
 use Twig_Environment;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 use ZfcTwig\ModuleOptions;
 
 class EnvironmentFactory implements FactoryInterface
@@ -22,7 +23,7 @@ class EnvironmentFactory implements FactoryInterface
         $options  = $container->get(ModuleOptions::class);
         $envClass = $options->getEnvironmentClass();
 
-        /** @var \Twig_Environment $env */
+        /** @var Twig_Environment $env */
         $env = new $envClass(null, $options->getEnvironmentOptions());
 
         if ($options->getEnableFallbackFunctions()) {
@@ -55,4 +56,15 @@ class EnvironmentFactory implements FactoryInterface
         // Extensions are loaded later to avoid circular dependencies (for example, if an extension needs Renderer).
         return $env;
     }
+
+    /**
+     * @param ServiceLocatorInterface $serviceLocator
+     * @return Twig_Environment
+     */
+    public function createService(ServiceLocatorInterface $serviceLocator)
+    {
+        return $this($serviceLocator, '');
+    }
+
+
 }

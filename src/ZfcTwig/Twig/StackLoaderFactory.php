@@ -3,7 +3,8 @@
 namespace ZfcTwig\Twig;
 
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 use ZfcTwig\ModuleOptions;
 
 class StackLoaderFactory implements FactoryInterface
@@ -27,4 +28,15 @@ class StackLoaderFactory implements FactoryInterface
 
         return $templateStack;
     }
+
+    /**
+     * @param ServiceLocatorInterface $serviceLocator
+     * @return StackLoader
+     */
+    public function createService(ServiceLocatorInterface $serviceLocator)
+    {
+        return $this($serviceLocator, StackLoader::class);
+    }
+
+
 }

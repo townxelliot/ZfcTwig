@@ -58,7 +58,7 @@ class ModuleOptions extends AbstractOptions
 
     /**
      * @param boolean $disableZfmodel
-     * @return ModuleOptions
+     * @return self
      */
     public function setDisableZfmodel($disableZfmodel)
     {
@@ -76,7 +76,7 @@ class ModuleOptions extends AbstractOptions
 
     /**
      * @param boolean $enableFallbackFunctions
-     * @return ModuleOptions
+     * @return self
      */
     public function setEnableFallbackFunctions($enableFallbackFunctions)
     {
@@ -94,7 +94,7 @@ class ModuleOptions extends AbstractOptions
 
     /**
      * @param mixed $environmentLoader
-     * @return ModuleOptions
+     * @return self
      */
     public function setEnvironmentLoader($environmentLoader)
     {
@@ -112,7 +112,7 @@ class ModuleOptions extends AbstractOptions
 
     /**
      * @param array $environmentOptions
-     * @return ModuleOptions
+     * @return self
      */
     public function setEnvironmentOptions($environmentOptions)
     {
@@ -130,7 +130,7 @@ class ModuleOptions extends AbstractOptions
 
     /**
      * @param array $extensions
-     * @return ModuleOptions
+     * @return self
      */
     public function setExtensions($extensions)
     {
@@ -148,7 +148,7 @@ class ModuleOptions extends AbstractOptions
 
     /**
      * @param array $helperManager
-     * @return ModuleOptions
+     * @return self
      */
     public function setHelperManager($helperManager)
     {
@@ -166,7 +166,7 @@ class ModuleOptions extends AbstractOptions
 
     /**
      * @param array $loaderChain
-     * @return ModuleOptions
+     * @return self
      */
     public function setLoaderChain($loaderChain)
     {
@@ -184,7 +184,7 @@ class ModuleOptions extends AbstractOptions
 
     /**
      * @param string $suffix
-     * @return ModuleOptions
+     * @return self
      */
     public function setSuffix($suffix)
     {

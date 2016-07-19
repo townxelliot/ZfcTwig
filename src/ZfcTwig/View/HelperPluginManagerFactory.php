@@ -4,7 +4,8 @@ namespace ZfcTwig\View;
 
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\ConfigInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\View\Exception;
 use ZfcTwig\ModuleOptions;
 
@@ -49,4 +50,15 @@ class HelperPluginManagerFactory implements FactoryInterface
 
         return $viewHelper;
     }
+
+    /**
+     * @param ServiceLocatorInterface $serviceLocator
+     * @return HelperPluginManager
+     */
+    public function createService(ServiceLocatorInterface $serviceLocator)
+    {
+        return $this($serviceLocator, HelperPluginManager::class);
+    }
+
+
 }

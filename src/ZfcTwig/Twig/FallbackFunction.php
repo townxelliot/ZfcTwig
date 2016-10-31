@@ -2,10 +2,15 @@
 
 namespace ZfcTwig\Twig;
 
-use Twig_Function;
+use \Twig_SimpleFunction;
 use Zend\View\Helper\HelperInterface;
 
-class FallbackFunction extends Twig_Function
+/**
+ * Class FallbackFunction
+ *
+ * @package ZfcTwig\Twig
+ */
+class FallbackFunction extends Twig_SimpleFunction
 {
     /**
      * @var HelperInterface
@@ -16,7 +21,7 @@ class FallbackFunction extends Twig_Function
     {
         $this->helper = $helper;
 
-        parent::__construct(['is_safe' => ['all']]);
+        parent::__construct($helper, $this->compile(), ['is_safe' => ['all']]);
     }
 
     /**
@@ -26,6 +31,8 @@ class FallbackFunction extends Twig_Function
      */
     public function compile()
     {
-        return sprintf('$this->env->getExtension("zfc-twig")->getRenderer()->plugin("%s")->__invoke', $this->helper);
+        return sprintf(
+            '$this->env->getExtension("%s")->getRenderer()->plugin("%s")->__invoke', Extension::class, $this->helper
+        );
     }
 }

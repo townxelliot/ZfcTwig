@@ -46,5 +46,10 @@
     },
     "suggest": {
         "zendframework/zend-mvc-plugin-flashmessenger": "for zf3 support"
+    },
+    "extra": {
+        "zf": {
+            "module": "ZfcTwig"
+        }
     }
 }

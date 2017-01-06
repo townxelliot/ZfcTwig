@@ -5,8 +5,9 @@ namespace ZfcTwig\Twig;
 use Twig_Error_Loader;
 use Twig_ExistsLoaderInterface;
 use Twig_LoaderInterface;
+use Twig_SourceContextLoaderInterface;
 
-class MapLoader implements Twig_ExistsLoaderInterface, Twig_LoaderInterface
+class MapLoader implements Twig_LoaderInterface, Twig_ExistsLoaderInterface, Twig_SourceContextLoaderInterface
 {
     /**
      * Array of templates to filenames.
@@ -45,7 +46,7 @@ class MapLoader implements Twig_ExistsLoaderInterface, Twig_LoaderInterface
     /**
      * {@inheritDoc}
      */
-    public function getSource($name)
+    public function getSourceContext($name)
     {
         if (!$this->exists($name)) {
             throw new Twig_Error_Loader(sprintf(

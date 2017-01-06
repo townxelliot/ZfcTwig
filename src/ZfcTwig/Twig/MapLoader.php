@@ -5,6 +5,7 @@ namespace ZfcTwig\Twig;
 use Twig_Error_Loader;
 use Twig_ExistsLoaderInterface;
 use Twig_LoaderInterface;
+use Twig_Source;
 use Twig_SourceContextLoaderInterface;
 
 class MapLoader implements Twig_LoaderInterface, Twig_ExistsLoaderInterface, Twig_SourceContextLoaderInterface
@@ -60,7 +61,7 @@ class MapLoader implements Twig_LoaderInterface, Twig_ExistsLoaderInterface, Twi
                 $this->map[$name]
             ));
         }
-        return file_get_contents($this->map[$name]);
+        return new Twig_Source(file_get_contents($this->map[$name]), $name, $this->map[$name]);
     }
 
     /**

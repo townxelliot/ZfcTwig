@@ -47,10 +47,10 @@ matrix:
     - php: hhvm-nightly
 
 before_script:
-   - if [[ $HHVMPHP7 == "yes" ]]; then echo hhvm.php7.all=1 >> /etc/hhvm/php.ini; fi
-   - if [[ $HHVMPHP7 == "yes" ]]; then cat /etc/hhvm/php.ini; fi
 
 install:
+ - if [[ $HHVMPHP7 == 'yes' ]]; then echo hhvm.php7.all=1 >> /etc/hhvm/php.ini; fi
+ - if [[ $HHVMPHP7 == 'yes' ]]; then cat /etc/hhvm/php.ini; fi
  - if [[ $DEPS == 'latest' ]]; then travis_retry composer update -o --prefer-source ; fi
  - if [[ $DEPS == 'lowest' ]]; then travis_retry composer update -o --prefer-lowest --prefer-stable ; fi
  - composer show

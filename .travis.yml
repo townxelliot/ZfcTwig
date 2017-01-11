@@ -16,14 +16,6 @@ cache:
 
 matrix:
   include:
-    - php: 7
-      env:
-        - DEPS=lowest
-    - php: 7
-    - php: 7.1
-      env:
-        - DEPS=lowest
-    - php: 7.1
     - php: hhvm-3.12
       env:
         - DEPS=lowest
@@ -55,6 +47,7 @@ matrix:
 
 before_script:
    - if [[ $HHVMPHP7 == "yes" ]]; then echo hhvm.php7.all=1 >> /etc/hhvm/php.ini; fi
+   - if [[ $HHVMPHP7 == "yes" ]]; then cat /etc/hhvm/php.ini; fi
 
 install:
  - if [[ $DEPS == 'latest' ]]; then travis_retry composer update -o --prefer-source ; fi

@@ -8,6 +8,7 @@ group: edge
 env:
   global:
     - DEPS=latest
+    - HHVMPHP7=no
 
 cache:
   directories:
@@ -19,24 +20,24 @@ matrix:
     - php: hhvm-3.12
       env:
         - DEPS=lowest
-        - HHVMPHP7="yes"
+        - HHVMPHP7=yes
     - php: hhvm-3.12
       env:
-        - HHVMPHP7="yes"
+        - HHVMPHP7=yes
     - php: hhvm-3.15
       env:
         - DEPS=lowest
-        - HHVMPHP7="yes"
+        - HHVMPHP7=yes
     - php: hhvm-3.15
       env:
-        - HHVMPHP7="yes"
+        - HHVMPHP7=yes
     - php: hhvm-nightly
       env:
         - DEPS=lowest
-        - HHVMPHP7="yes"
+        - HHVMPHP7=yes
     - php: hhvm-nightly
       env:
-        - HHVMPHP7="yes"
+        - HHVMPHP7=yes
     - php: nightly
       env:
         - DEPS=lowest

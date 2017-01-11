@@ -42,7 +42,8 @@
         "zendframework/zend-mvc": "^2.7 || ^3.0",
         "zendframework/zend-servicemanager": "^2.7 || ^3.0",
         "zendframework/zend-view": "^2.7",
-        "phpunit/phpunit": "^5.7.5"
+        "phpunit/phpunit": "^5.7.5",
+        "friendsofphp/php-cs-fixer": "^1.11"
     },
     "suggest": {
         "zendframework/zend-mvc-plugin-flashmessenger": "for zf3 support"

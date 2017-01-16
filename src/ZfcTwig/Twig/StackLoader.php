@@ -73,7 +73,7 @@ class StackLoader extends Twig_Loader_Filesystem
             $name .= '.' . $defaultSuffix;
         }
 
-        //$this->validateName($name);
+        $this->validateName($name);
 
         $namespace = '__main__';
         if (isset($name[0]) && '@' == $name[0]) {
@@ -124,5 +124,31 @@ class StackLoader extends Twig_Loader_Filesystem
         }
 
         throw new Twig_Error_Loader($this->errorCache[$name]);
+    }
+
+    /**
+     * @param string $name
+     * @throws Twig_Error_Loader
+     */
+    private function validateName($name)
+    {
+        if (false !== strpos($name, "\0")) {
+            throw new Twig_Error_Loader('A template name cannot contain NUL bytes.');
+        }
+
+        $name = ltrim($name, '/');
+        $parts = explode('/', $name);
+        $level = 0;
+        foreach ($parts as $part) {
+            if ('..' === $part) {
+                --$level;
+            } elseif ('.' !== $part) {
+                ++$level;
+            }
+
+            if ($level < 0) {
+                throw new Twig_Error_Loader(sprintf('Looks like you try to load a template outside configured directories (%s).', $name));
+            }
+        }
     }
 }

@@ -5,8 +5,7 @@ namespace ZfcTwig\Twig;
 use Interop\Container\ContainerInterface;
 use InvalidArgumentException;
 use Twig_Loader_Chain;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 use ZfcTwig\ModuleOptions;
 
 class ChainLoaderFactory implements FactoryInterface
@@ -34,15 +33,5 @@ class ChainLoaderFactory implements FactoryInterface
 
         return $chain;
     }
-
-    /**
-     * @param ServiceLocatorInterface $serviceLocator
-     * @return Twig_Loader_Chain
-     */
-    public function createService(ServiceLocatorInterface $serviceLocator)
-    {
-        return $this($serviceLocator, Twig_Loader_Chain::class);
-    }
-
 
 }

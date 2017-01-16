@@ -47,14 +47,10 @@ class StackLoader extends Twig_Loader_Filesystem
     }
 
     /**
-     * @param $name
-     *
-     * @return bool|string
-     * @throws Twig_Error_Loader
+     * {@inheritDoc}
      */
-    protected function findTemplate($name)
+    protected function findTemplate($name, $throw = true)
     {
-        $throw = func_num_args() > 1 ? func_get_arg(1) : true;
         $name  = (string)$name;
 
         // normalize name
@@ -65,7 +61,7 @@ class StackLoader extends Twig_Loader_Filesystem
         }
 
         if (isset($this->errorCache[$name])) {
-            if ( ! $throw) {
+            if (!$throw) {
                 return false;
             }
             throw new Twig_Error_Loader($this->errorCache[$name]);
@@ -87,7 +83,7 @@ class StackLoader extends Twig_Loader_Filesystem
                     $name
                 );
 
-                if ( ! $throw) {
+                if (!$throw) {
                     return false;
                 }
 
@@ -99,10 +95,10 @@ class StackLoader extends Twig_Loader_Filesystem
             $name = substr($name, $pos + 1);
         }
 
-        if ( ! isset($this->paths[$namespace])) {
+        if (!isset($this->paths[$namespace])) {
             $this->errorCache[$name] = sprintf('There are no registered paths for namespace "%s".', $namespace);
 
-            if ( ! $throw) {
+            if (!$throw) {
                 return false;
             }
             throw new Twig_Error_Loader($this->errorCache[$name]);
@@ -123,10 +119,36 @@ class StackLoader extends Twig_Loader_Filesystem
             )
         );
 
-        if ( ! $throw) {
+        if (!$throw) {
             return false;
         }
 
         throw new Twig_Error_Loader($this->errorCache[$name]);
+    }
+
+    /**
+     * @param string $name
+     * @throws Twig_Error_Loader
+     */
+    private function validateName($name)
+    {
+        if (false !== strpos($name, "\0")) {
+            throw new Twig_Error_Loader('A template name cannot contain NUL bytes.');
+        }
+
+        $name = ltrim($name, '/');
+        $parts = explode('/', $name);
+        $level = 0;
+        foreach ($parts as $part) {
+            if ('..' === $part) {
+                --$level;
+            } elseif ('.' !== $part) {
+                ++$level;
+            }
+
+            if ($level < 0) {
+                throw new Twig_Error_Loader(sprintf('Looks like you try to load a template outside configured directories (%s).', $name));
+            }
+        }
     }
 }

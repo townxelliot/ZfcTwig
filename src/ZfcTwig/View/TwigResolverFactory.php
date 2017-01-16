@@ -3,8 +3,7 @@
 namespace ZfcTwig\View;
 
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 
 class TwigResolverFactory implements FactoryInterface
 {
@@ -18,15 +17,5 @@ class TwigResolverFactory implements FactoryInterface
     {
         return new TwigResolver($container->get('Twig_Environment'));
     }
-
-    /**
-     * @param ServiceLocatorInterface $serviceLocator
-     * @return TwigResolver
-     */
-    public function createService(ServiceLocatorInterface $serviceLocator)
-    {
-        return $this($serviceLocator, TwigResolver::class);
-    }
-
 
 }

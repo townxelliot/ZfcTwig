@@ -17,18 +17,19 @@ cache:
 
 matrix:
   include:
-    - php: hhvm-3.12
+    - php: 7.0
+      env:
+        - DEPS=lowest
+    - php: 7.0
+    - php: 7.1
+      env:
+        - DEPS=lowest
+    - php: 7.1
+    - php: hhvm-3.17
       env:
         - DEPS=lowest
         - HHVMPHP7=yes
-    - php: hhvm-3.12
-      env:
-        - HHVMPHP7=yes
-    - php: hhvm-3.15
-      env:
-        - DEPS=lowest
-        - HHVMPHP7=yes
-    - php: hhvm-3.15
+    - php: hhvm-3.17
       env:
         - HHVMPHP7=yes
     - php: hhvm-nightly
@@ -44,9 +45,8 @@ matrix:
     - php: nightly
   allow_failures:
     - php: nightly
+    - php: hhvm-3.17
     - php: hhvm-nightly
-
-before_script:
 
 install:
  - if [[ $HHVMPHP7 == 'yes' ]]; then echo hhvm.php7.all=1 >> /etc/hhvm/php.ini; fi

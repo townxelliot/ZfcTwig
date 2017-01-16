@@ -3,8 +3,7 @@
 namespace ZfcTwig\Twig;
 
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 use ZfcTwig\ModuleOptions;
 
 class MapLoaderFactory implements FactoryInterface
@@ -33,15 +32,5 @@ class MapLoaderFactory implements FactoryInterface
 
         return $templateMap;
     }
-
-    /**
-     * @param ServiceLocatorInterface $serviceLocator
-     * @return MapLoader
-     */
-    public function createService(ServiceLocatorInterface $serviceLocator)
-    {
-        return $this($serviceLocator, MapLoader::class);
-    }
-
 
 }

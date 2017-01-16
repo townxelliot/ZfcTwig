@@ -5,8 +5,7 @@ namespace ZfcTwig\Twig;
 use Interop\Container\ContainerInterface;
 use RuntimeException;
 use Twig_Environment;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 use ZfcTwig\ModuleOptions;
 
 class EnvironmentFactory implements FactoryInterface
@@ -54,15 +53,5 @@ class EnvironmentFactory implements FactoryInterface
         // Extensions are loaded later to avoid circular dependencies (for example, if an extension needs Renderer).
         return $env;
     }
-
-    /**
-     * @param ServiceLocatorInterface $serviceLocator
-     * @return Twig_Environment
-     */
-    public function createService(ServiceLocatorInterface $serviceLocator)
-    {
-        return $this($serviceLocator, '');
-    }
-
 
 }

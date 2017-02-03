@@ -1,7 +1,7 @@
 <?php
 namespace ZfcTwigTest\View\Strategy;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase as TestCase;
 use Twig_Environment;
 use Twig_Loader_Array;
 use Twig_Loader_Chain;

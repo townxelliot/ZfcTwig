@@ -48,10 +48,6 @@ matrix:
     - php: 7.2
     - php: nightly
 
-notifications:
-  irc: "irc.freenode.org#zftalk.dev"
-  email: false
-
 before_install:
   - travis_retry composer self-update
   - if [[ $TEST_COVERAGE != 'true' ]]; then phpenv config-rm xdebug.ini || true ; fi

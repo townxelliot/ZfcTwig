@@ -49,6 +49,11 @@
     "extra": {
         "zf": {
             "module": "ZfcTwig"
+        },
+        "branch-alias": {
+            "dev-release/1.4": "1.4-dev",
+            "dev-master": "2.1-dev",
+            "dev-develop": "2.2-dev"
         }
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+use Twig\Environment;
+use Twig\Loader;
 use ZfcTwig\ModuleOptions;
 use ZfcTwig\ModuleOptionsFactory;
 use ZfcTwig\Twig;

@@ -6,7 +6,7 @@ use Twig\Error;
 use Twig\Loader;
 use Twig\Source;
 
-class MapLoader implements Loader\ExistsLoaderInterface, Loader\LoaderInterface, Loader\SourceContextLoaderInterface
+class MapLoader implements Loader\ExistsLoaderInterface, Loader\SourceContextLoaderInterface
 {
     /**
      * Array of templates to filenames.

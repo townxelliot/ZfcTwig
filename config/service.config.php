@@ -10,7 +10,7 @@ use ZfcTwig\View;
 return [
     'aliases' => [
         'ZfcTwigExtension'               => Twig\Extension::class,
-        'ZfcTwigLoaderChain'             => 'Twig_Loader_Chain',
+        'ZfcTwigLoaderChain'             => Loader\ChainLoader::class,
         'ZfcTwigLoaderTemplateMap'       => Twig\MapLoader::class,
         'ZfcTwigLoaderTemplatePathStack' => Twig\StackLoader::class,
         'ZfcTwigRenderer'                => View\TwigRenderer::class,
@@ -20,8 +20,8 @@ return [
     ],
 
     'factories' => [
-        'Twig_Environment'  => Twig\EnvironmentFactory::class,
-        'Twig_Loader_Chain' => Twig\ChainLoaderFactory::class,
+        Environment::class  => Twig\EnvironmentFactory::class,
+        Loader\ChainLoader::class => Twig\ChainLoaderFactory::class,
 
         Twig\Extension::class => Twig\ExtensionFactory::class,
         Twig\MapLoader::class => Twig\MapLoaderFactory::class,

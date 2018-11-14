@@ -7,6 +7,7 @@ use RuntimeException;
 use Twig\Environment;
 use Zend\ServiceManager\Factory\FactoryInterface;
 use ZfcTwig\ModuleOptions;
+use function sprintf;
 
 class EnvironmentFactory implements FactoryInterface
 {

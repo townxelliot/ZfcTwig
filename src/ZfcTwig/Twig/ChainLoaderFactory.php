@@ -7,6 +7,7 @@ use InvalidArgumentException;
 use Twig\Loader;
 use Zend\ServiceManager\Factory\FactoryInterface;
 use ZfcTwig\ModuleOptions;
+use function is_string;
 
 class ChainLoaderFactory implements FactoryInterface
 {

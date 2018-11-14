@@ -5,6 +5,7 @@ namespace ZfcTwig\Twig;
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
 use ZfcTwig\ModuleOptions;
+use function pathinfo;
 
 class MapLoaderFactory implements FactoryInterface
 {

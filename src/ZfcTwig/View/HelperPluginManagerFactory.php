@@ -7,6 +7,9 @@ use Zend\ServiceManager\ConfigInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\View\Exception;
 use ZfcTwig\ModuleOptions;
+use function is_string;
+use function class_exists;
+use function sprintf;
 
 class HelperPluginManagerFactory implements FactoryInterface
 {

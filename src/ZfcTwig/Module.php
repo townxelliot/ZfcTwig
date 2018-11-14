@@ -7,6 +7,8 @@ use Twig\Environment;
 use Zend\EventManager\EventInterface;
 use Zend\ModuleManager\Feature\BootstrapListenerInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
+use function is_string;
+use function is_object;
 
 class Module implements
     BootstrapListenerInterface,

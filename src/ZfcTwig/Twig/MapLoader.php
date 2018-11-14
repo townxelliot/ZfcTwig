@@ -5,6 +5,11 @@ namespace ZfcTwig\Twig;
 use Twig\Error;
 use Twig\Loader;
 use Twig\Source;
+use function array_key_exists;
+use function file_exists;
+use function file_get_contents;
+use function filemtime;
+use function sprintf;
 
 class MapLoader implements Loader\ExistsLoaderInterface, Loader\SourceContextLoaderInterface
 {

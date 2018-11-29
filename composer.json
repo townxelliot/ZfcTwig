@@ -5,7 +5,8 @@
     "keywords": [
         "twig",
         "module",
-        "zf"
+        "zf",
+        "zf3"
     ],
     "license": "BSD-3-Clause",
     "homepage": "https://github.com/kokspflanze/ZfcTwig/",

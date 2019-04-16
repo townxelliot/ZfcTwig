@@ -37,4 +37,5 @@ class Extension extends AbstractExtension
     {
         return __CLASS__;
     }
+
 }

@@ -11,7 +11,7 @@ use function file_get_contents;
 use function filemtime;
 use function sprintf;
 
-class MapLoader implements Loader\ExistsLoaderInterface, Loader\SourceContextLoaderInterface
+class MapLoader implements Loader\LoaderInterface, Loader\SourceContextLoaderInterface
 {
     /**
      * Array of templates to filenames.
@@ -58,7 +58,7 @@ class MapLoader implements Loader\ExistsLoaderInterface, Loader\SourceContextLoa
                 $name
             ));
         }
-        if(!file_exists($this->map[$name])) {
+        if (!file_exists($this->map[$name])) {
             throw new Error\LoaderError(sprintf(
                 'Unable to open file "%s" from template map',
                 $this->map[$name]
@@ -82,4 +82,5 @@ class MapLoader implements Loader\ExistsLoaderInterface, Loader\SourceContextLoa
     {
         return filemtime($this->map[$name]) <= $time;
     }
+
 }

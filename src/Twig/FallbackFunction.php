@@ -36,4 +36,5 @@ class FallbackFunction extends TwigFunction
             '$this->env->getExtension("%s")->getRenderer()->plugin("%s")->__invoke', Extension::class, $this->helper
         );
     }
+
 }

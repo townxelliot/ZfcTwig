@@ -30,4 +30,5 @@ class TwigResolver implements ResolverInterface
     {
         return $this->environment->loadTemplate($name);
     }
+
 }

@@ -272,4 +272,5 @@ class TwigRenderer implements RendererInterface, TreeRendererInterface
         $template = $this->resolver->resolve($nameOrModel, $this);
         return $template->render((array) $values);
     }
+
 }

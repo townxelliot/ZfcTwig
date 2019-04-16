@@ -36,4 +36,5 @@ class TwigResolverTest extends TestCase
     {
         $this->assertInstanceOf(Template::class, $this->resolver->resolve('key2'));
     }
+
 }

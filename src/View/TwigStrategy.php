@@ -84,4 +84,5 @@ class TwigStrategy implements ListenerAggregateInterface
 
         $response->setContent($result);
     }
+
 }

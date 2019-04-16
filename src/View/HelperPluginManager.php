@@ -42,4 +42,5 @@ class HelperPluginManager extends ZendHelperPluginManager
         Helper\Layout::class => InvokableFactory::class,
         Helper\RenderChildModel::class => InvokableFactory::class,
     ];
+
 }

@@ -29,7 +29,7 @@ class TwigRendererTest extends TestCase
     {
         $content = $this->renderer->render('key1');
 
-        $this->assertInternalType('string', $content);
+        $this->assertIsString($content);
         $this->assertSame('var1 ', $content);
     }
 
@@ -37,7 +37,7 @@ class TwigRendererTest extends TestCase
     {
         $content = $this->renderer->render('key1', ['foobar' => 'baz']);
 
-        $this->assertInternalType('string', $content);
+        $this->assertIsString($content);
         $this->assertSame('var1 baz', $content);
     }
 
@@ -54,7 +54,7 @@ class TwigRendererTest extends TestCase
 
         $content = $this->renderer->render($model);
 
-        $this->assertInternalType('string', $content);
+        $this->assertIsString($content);
         $this->assertSame('var1 baz', $content);
     }
 

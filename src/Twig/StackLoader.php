@@ -167,4 +167,5 @@ class StackLoader extends Loader\FilesystemLoader
             }
         }
     }
+
 }

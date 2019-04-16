@@ -231,5 +231,5 @@ class ModuleOptions extends AbstractOptions
     {
         return $this->globals;
     }
-}
 
+}

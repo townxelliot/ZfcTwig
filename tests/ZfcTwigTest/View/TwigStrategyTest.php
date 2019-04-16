@@ -44,4 +44,5 @@ class TwigStrategyTest extends TestCase
         $result = $this->strategy->selectRenderer($event);
         $this->assertSame($this->renderer, $result);
     }
+
 }

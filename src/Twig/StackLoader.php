@@ -60,7 +60,7 @@ class StackLoader extends Loader\FilesystemLoader
      * {@inheritDoc}
      * @throws Error\LoaderError
      */
-    protected function findTemplate($name, $throw = true)
+    protected function findTemplate($name, $throw = true): string
     {
         $name  = (string)$name;
 

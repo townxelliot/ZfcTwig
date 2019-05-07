@@ -38,7 +38,7 @@ class StackLoader extends Loader\FilesystemLoader
      *
      * @return StackLoader
      */
-    public function setDefaultSuffix($defaultSuffix)
+    public function setDefaultSuffix(string $defaultSuffix)
     {
         $this->defaultSuffix = (string)$defaultSuffix;
         $this->defaultSuffix = ltrim($this->defaultSuffix, '.');
@@ -51,7 +51,7 @@ class StackLoader extends Loader\FilesystemLoader
      *
      * @return string
      */
-    public function getDefaultSuffix()
+    public function getDefaultSuffix(): string
     {
         return $this->defaultSuffix;
     }
@@ -60,7 +60,7 @@ class StackLoader extends Loader\FilesystemLoader
      * {@inheritDoc}
      * @throws Error\LoaderError
      */
-    protected function findTemplate($name, $throw = true): string
+    protected function findTemplate(string $name, bool $throw = true): string
     {
         $name  = (string)$name;
 
@@ -141,7 +141,7 @@ class StackLoader extends Loader\FilesystemLoader
      * @param string $name
      * @throws Error\LoaderError
      */
-    private function validateName($name)
+    private function validateName(string $name): void
     {
         if (false !== strpos($name, "\0")) {
             throw new Error\LoaderError('A template name cannot contain NUL bytes.');

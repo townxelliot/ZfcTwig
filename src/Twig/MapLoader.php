@@ -27,7 +27,7 @@ class MapLoader implements Loader\LoaderInterface
      * @throws Error\LoaderError
      * @return MapLoader
      */
-    public function add($name, $path)
+    public function add(string $name, string $path): MapLoader
     {
         if ($this->exists($name)) {
             throw new Error\LoaderError(sprintf(
@@ -42,7 +42,7 @@ class MapLoader implements Loader\LoaderInterface
     /**
      * {@inheritDoc}
      */
-    public function exists($name): bool
+    public function exists(string $name): bool
     {
         return array_key_exists($name, $this->map);
     }
@@ -50,7 +50,7 @@ class MapLoader implements Loader\LoaderInterface
     /**
      * {@inheritDoc}
      */
-    public function getSourceContext($name): Source
+    public function getSourceContext(string $name): Source
     {
         if (!$this->exists($name)) {
             throw new Error\LoaderError(sprintf(
@@ -70,7 +70,7 @@ class MapLoader implements Loader\LoaderInterface
     /**
      * {@inheritDoc}
      */
-    public function getCacheKey($name): string
+    public function getCacheKey(string $name): string
     {
         return $name;
     }
@@ -78,7 +78,7 @@ class MapLoader implements Loader\LoaderInterface
     /**
      * {@inheritDoc}
      */
-    public function isFresh($name, $time): bool
+    public function isFresh(string $name, int $time): bool
     {
         return filemtime($this->map[$name]) <= $time;
     }

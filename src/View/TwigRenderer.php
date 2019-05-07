@@ -88,7 +88,7 @@ class TwigRenderer implements RendererInterface, TreeRendererInterface
      * @param  array $argv
      * @return mixed
      */
-    public function __call($method, $argv)
+    public function __call(string $method, array $argv)
     {
         if (!isset($this->__pluginCache[$method])) {
             $this->__pluginCache[$method] = $this->plugin($method);
@@ -101,9 +101,9 @@ class TwigRenderer implements RendererInterface, TreeRendererInterface
 
     /**
      * @param boolean $canRenderTrees
-     * @return TwigRenderer
+     * @return $this
      */
-    public function setCanRenderTrees($canRenderTrees)
+    public function setCanRenderTrees(bool $canRenderTrees): self
     {
         $this->canRenderTrees = $canRenderTrees;
         return $this;
@@ -112,7 +112,7 @@ class TwigRenderer implements RendererInterface, TreeRendererInterface
     /**
      * @return boolean
      */
-    public function canRenderTrees()
+    public function canRenderTrees(): bool
     {
         return $this->canRenderTrees;
     }
@@ -124,7 +124,7 @@ class TwigRenderer implements RendererInterface, TreeRendererInterface
      * @param  null|array $options Options to pass to plugin constructor (if not already instantiated)
      * @return \Zend\View\Helper\AbstractHelper
      */
-    public function plugin($name, array $options = null)
+    public function plugin(string $name, array $options = null)
     {
         $helper = $this->getHelperPluginManager()
                     ->setRenderer($this);
@@ -143,7 +143,7 @@ class TwigRenderer implements RendererInterface, TreeRendererInterface
      * @return bool
      * @see \ZfcTwig\Twig\Environment::canLoadTemplate()
      */
-    public function canRender($name)
+    public function canRender(string $name): bool
     {
         return $this->loader->exists($name);
     }
@@ -157,7 +157,7 @@ class TwigRenderer implements RendererInterface, TreeRendererInterface
      *
      * @return Environment
      */
-    public function getEngine()
+    public function getEngine(): Environment
     {
         return $this->environment;
     }
@@ -166,9 +166,9 @@ class TwigRenderer implements RendererInterface, TreeRendererInterface
      * Set the resolver used to map a template name to a resource the renderer may consume.
      *
      * @param  ResolverInterface $resolver
-     * @return TwigRenderer
+     * @return $this
      */
-    public function setResolver(ResolverInterface $resolver)
+    public function setResolver(ResolverInterface $resolver): self
     {
         $this->resolver = $resolver;
         return $this;
@@ -176,9 +176,9 @@ class TwigRenderer implements RendererInterface, TreeRendererInterface
 
     /**
      * @param HelperPluginManager $helperPluginManager
-     * @return TwigRenderer
+     * @return $this
      */
-    public function setHelperPluginManager(HelperPluginManager $helperPluginManager)
+    public function setHelperPluginManager(HelperPluginManager $helperPluginManager): self
     {
         $helperPluginManager->setRenderer($this);
         $this->helperPluginManager = $helperPluginManager;
@@ -186,9 +186,9 @@ class TwigRenderer implements RendererInterface, TreeRendererInterface
     }
 
     /**
-     * @return \Zend\View\HelperPluginManager
+     * @return HelperPluginManager
      */
-    public function getHelperPluginManager()
+    public function getHelperPluginManager(): HelperPluginManager
     {
         return $this->helperPluginManager;
     }
@@ -196,16 +196,16 @@ class TwigRenderer implements RendererInterface, TreeRendererInterface
     /**
      * @return HelperPluginManager
      */
-    public function getZendHelperPluginManager()
+    public function getZendHelperPluginManager(): HelperPluginManager
     {
         return $this->zendHelperPluginManager;
     }
 
     /**
      * @param HelperPluginManager $zendHelperPluginManager
-     * @return self
+     * @return $this
      */
-    public function setZendHelperPluginManager($zendHelperPluginManager)
+    public function setZendHelperPluginManager(HelperPluginManager $zendHelperPluginManager): self
     {
         $this->zendHelperPluginManager = $zendHelperPluginManager;
         return $this;
@@ -219,7 +219,7 @@ class TwigRenderer implements RendererInterface, TreeRendererInterface
      * @return string|null The script output.
      * @throws \Zend\View\Exception\DomainException
      */
-    public function render($nameOrModel, $values = null)
+    public function render($nameOrModel, $values = null): ?string
     {
         $model = null;
 

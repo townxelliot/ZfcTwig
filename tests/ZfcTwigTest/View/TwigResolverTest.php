@@ -5,7 +5,7 @@ namespace ZfcTwigTest\View;
 use PHPUnit\Framework\TestCase;
 use Twig\Environment;
 use Twig\Loader;
-use Twig\Template;
+use Twig\TemplateWrapper;
 use ZfcTwig\View\TwigResolver;
 
 class TwigResolverTest extends TestCase
@@ -25,7 +25,7 @@ class TwigResolverTest extends TestCase
 
     public function testResolve()
     {
-        $this->assertInstanceOf(Template::class, $this->resolver->resolve('key1'));
+        $this->assertInstanceOf(TemplateWrapper::class, $this->resolver->resolve('key1'));
     }
 
     /**
@@ -34,7 +34,7 @@ class TwigResolverTest extends TestCase
      */
     public function testResolveError()
     {
-        $this->assertInstanceOf(Template::class, $this->resolver->resolve('key2'));
+        $this->assertInstanceOf(TemplateWrapper::class, $this->resolver->resolve('key2'));
     }
 
 }

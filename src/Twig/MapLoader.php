@@ -5,8 +5,13 @@ namespace ZfcTwig\Twig;
 use Twig\Error;
 use Twig\Loader;
 use Twig\Source;
+use function array_key_exists;
+use function file_exists;
+use function file_get_contents;
+use function filemtime;
+use function sprintf;
 
-class MapLoader implements Loader\ExistsLoaderInterface, Loader\SourceContextLoaderInterface
+class MapLoader implements Loader\LoaderInterface
 {
     /**
      * Array of templates to filenames.
@@ -37,7 +42,7 @@ class MapLoader implements Loader\ExistsLoaderInterface, Loader\SourceContextLoa
     /**
      * {@inheritDoc}
      */
-    public function exists($name)
+    public function exists($name): bool
     {
         return array_key_exists($name, $this->map);
     }
@@ -45,7 +50,7 @@ class MapLoader implements Loader\ExistsLoaderInterface, Loader\SourceContextLoa
     /**
      * {@inheritDoc}
      */
-    public function getSourceContext($name)
+    public function getSourceContext($name): Source
     {
         if (!$this->exists($name)) {
             throw new Error\LoaderError(sprintf(
@@ -53,7 +58,7 @@ class MapLoader implements Loader\ExistsLoaderInterface, Loader\SourceContextLoa
                 $name
             ));
         }
-        if(!file_exists($this->map[$name])) {
+        if (!file_exists($this->map[$name])) {
             throw new Error\LoaderError(sprintf(
                 'Unable to open file "%s" from template map',
                 $this->map[$name]
@@ -65,7 +70,7 @@ class MapLoader implements Loader\ExistsLoaderInterface, Loader\SourceContextLoa
     /**
      * {@inheritDoc}
      */
-    public function getCacheKey($name)
+    public function getCacheKey($name): string
     {
         return $name;
     }
@@ -73,8 +78,9 @@ class MapLoader implements Loader\ExistsLoaderInterface, Loader\SourceContextLoa
     /**
      * {@inheritDoc}
      */
-    public function isFresh($name, $time)
+    public function isFresh($name, $time): bool
     {
         return filemtime($this->map[$name]) <= $time;
     }
+
 }

@@ -4,6 +4,7 @@ namespace ZfcTwig\Twig;
 
 use Twig\TwigFunction;
 use Zend\View\Helper\HelperInterface;
+use function sprintf;
 
 /**
  * Class FallbackFunction
@@ -35,4 +36,5 @@ class FallbackFunction extends TwigFunction
             '$this->env->getExtension("%s")->getRenderer()->plugin("%s")->__invoke', Extension::class, $this->helper
         );
     }
+
 }

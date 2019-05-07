@@ -3,35 +3,35 @@
 namespace ZfcTwig\Twig;
 
 use Interop\Container\ContainerInterface;
-use InvalidArgumentException;
-use Twig\Loader;
 use Zend\ServiceManager\Factory\FactoryInterface;
 use ZfcTwig\ModuleOptions;
+use function pathinfo;
 
-class ChainLoaderFactory implements FactoryInterface
+class MapLoaderFactory implements FactoryInterface
 {
     /**
      * @param ContainerInterface $container
      * @param string $requestedName
      * @param array|null $options
-     * @return Loader\ChainLoader
+     * @return MapLoader
+     * @throws \Twig\Error\LoaderError
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         /** @var ModuleOptions $options */
         $options = $container->get(ModuleOptions::class);
 
-        // Setup loader
-        $chain = new Loader\ChainLoader();
+        /** @var \Zend\View\Resolver\TemplateMapResolver */
+        $zfTemplateMap = $container->get('ViewTemplateMapResolver');
 
-        foreach ($options->getLoaderChain() as $loader) {
-            if (!is_string($loader) || !$container->has($loader)) {
-                throw new InvalidArgumentException('Loaders should be a service manager alias.');
+        $templateMap = new MapLoader();
+        foreach ($zfTemplateMap as $name => $path) {
+            if ($options->getSuffix() == pathinfo($path, PATHINFO_EXTENSION)) {
+                $templateMap->add($name, $path);
             }
-            $chain->addLoader($container->get($loader));
         }
 
-        return $chain;
+        return $templateMap;
     }
 
 }

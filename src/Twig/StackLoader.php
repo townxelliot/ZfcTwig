@@ -4,6 +4,16 @@ namespace ZfcTwig\Twig;
 
 use Twig\Error;
 use Twig\Loader;
+use function ltrim;
+use function preg_replace;
+use function strtr;
+use function pathinfo;
+use function strpos;
+use function sprintf;
+use function substr;
+use function is_file;
+use function implode;
+use function explode;
 
 /**
  * Class StackLoader
@@ -50,7 +60,7 @@ class StackLoader extends Loader\FilesystemLoader
      * {@inheritDoc}
      * @throws Error\LoaderError
      */
-    protected function findTemplate($name, $throw = true)
+    protected function findTemplate($name, $throw = true): string
     {
         $name  = (string)$name;
 
@@ -157,4 +167,5 @@ class StackLoader extends Loader\FilesystemLoader
             }
         }
     }
+
 }

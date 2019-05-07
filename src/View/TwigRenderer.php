@@ -11,6 +11,9 @@ use Zend\View\Renderer\RendererInterface;
 use Zend\View\Renderer\TreeRendererInterface;
 use Zend\View\Resolver\ResolverInterface;
 use Zend\View\View;
+use function is_callable;
+use function call_user_func_array;
+use function sprintf;
 
 class TwigRenderer implements RendererInterface, TreeRendererInterface
 {
@@ -269,4 +272,5 @@ class TwigRenderer implements RendererInterface, TreeRendererInterface
         $template = $this->resolver->resolve($nameOrModel, $this);
         return $template->render((array) $values);
     }
+
 }

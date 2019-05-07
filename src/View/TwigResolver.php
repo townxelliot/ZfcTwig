@@ -28,6 +28,7 @@ class TwigResolver implements ResolverInterface
      */
     public function resolve($name, Renderer $renderer = null)
     {
-        return $this->environment->loadTemplate($name);
+        return $this->environment->load($name);
     }
+
 }

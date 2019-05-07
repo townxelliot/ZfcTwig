@@ -4,8 +4,9 @@ namespace ZfcTwigTest\View;
 
 use PHPUnit\Framework\TestCase;
 use Twig\Environment;
+use Twig\Error\LoaderError;
 use Twig\Loader;
-use Twig\Template;
+use Twig\TemplateWrapper;
 use ZfcTwig\View\TwigResolver;
 
 class TwigResolverTest extends TestCase
@@ -13,7 +14,7 @@ class TwigResolverTest extends TestCase
     /** @var  TwigResolver */
     protected $resolver;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -25,15 +26,14 @@ class TwigResolverTest extends TestCase
 
     public function testResolve()
     {
-        $this->assertInstanceOf(Template::class, $this->resolver->resolve('key1'));
+        $this->assertInstanceOf(TemplateWrapper::class, $this->resolver->resolve('key1'));
     }
 
-    /**
-     * @expectedException \Twig_Error_Loader
-     * @expectedExceptionMessage Template "key2" is not defined.
-     */
     public function testResolveError()
     {
-        $this->assertInstanceOf(Template::class, $this->resolver->resolve('key2'));
+        $this->expectException(LoaderError::class);
+        $this->expectExceptionMessage('Template "key2" is not defined.');
+        $this->assertInstanceOf(TemplateWrapper::class, $this->resolver->resolve('key2'));
     }
+
 }

@@ -5,43 +5,31 @@ language: php
 env:
   global:
     - DEPS=latest
+      - COMPOSER_ARGS="--no-interaction"
 
 cache:
   directories:
     - $HOME/.composer/cache
     - $HOME/.local
 
-env:
-  global:
-    - COMPOSER_ARGS="--no-interaction"
-
 matrix:
   include:
-    - php: 7.0
+    - php: 7.2
       env:
         - DEPS=lowest
-    - php: 7.0
+    - php: 7.2
       env:
         - DEPS=locked
-    - php: 7.0
+    - php: 7.2
       env:
         - DEPS=latest
-    - php: 7.1
+    - php: 7.3
       env:
         - DEPS=lowest
-    - php: 7.1
+    - php: 7.3
       env:
         - DEPS=locked
-    - php: 7.1
-      env:
-        - DEPS=latest
-    - php: 7.2
-      env:
-        - DEPS=lowest
-    - php: 7.2
-      env:
-        - DEPS=locked
-    - php: 7.2
+    - php: 7.3
       env:
         - DEPS=latest
     - php: nightly

@@ -15,7 +15,7 @@ class TwigRendererTest extends TestCase
     /** @var  TwigRenderer */
     protected $renderer;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -29,7 +29,7 @@ class TwigRendererTest extends TestCase
     {
         $content = $this->renderer->render('key1');
 
-        $this->assertInternalType('string', $content);
+        $this->assertIsString($content);
         $this->assertSame('var1 ', $content);
     }
 
@@ -37,13 +37,13 @@ class TwigRendererTest extends TestCase
     {
         $content = $this->renderer->render('key1', ['foobar' => 'baz']);
 
-        $this->assertInternalType('string', $content);
+        $this->assertIsString($content);
         $this->assertSame('var1 baz', $content);
     }
 
     public function testRenderWithModelAndValues()
     {
-        /** @var \PHPUnit_Framework_MockObject_MockObject|ModelInterface $model */
+        /** @var \PHPUnit\Framework\MockObject\MockObject|ModelInterface $model */
         $model = $this->getMockBuilder(ModelInterface::class)->getMock();
         $model->expects($this->exactly(1))
             ->method('getTemplate')
@@ -54,7 +54,7 @@ class TwigRendererTest extends TestCase
 
         $content = $this->renderer->render($model);
 
-        $this->assertInternalType('string', $content);
+        $this->assertIsString($content);
         $this->assertSame('var1 baz', $content);
     }
 

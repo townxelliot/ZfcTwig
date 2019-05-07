@@ -19,7 +19,7 @@ class TwigStrategyTest extends TestCase
     /** @var  TwigStrategy */
     protected $strategy;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -32,7 +32,7 @@ class TwigStrategyTest extends TestCase
 
     public function testSelectRendererWhenTemplateFound()
     {
-        /** @var \PHPUnit_Framework_MockObject_MockObject|ModelInterface $model */
+        /** @var \PHPUnit\Framework\MockObject\MockObject|ModelInterface $model */
         $model = $this->getMockBuilder(ModelInterface::class)->getMock();
         $model->expects($this->at(0))
               ->method('getTemplate')
@@ -44,4 +44,5 @@ class TwigStrategyTest extends TestCase
         $result = $this->strategy->selectRenderer($event);
         $this->assertSame($this->renderer, $result);
     }
+
 }

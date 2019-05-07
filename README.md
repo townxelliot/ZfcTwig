@@ -74,7 +74,7 @@ public function getServiceConfiguration()
 
 ### Using ZF View Helpers
 
-Using ZF view helpers is supported through the [ZfcTwig\Twig\FallbackFunction](https://github.com/kokspflanze/ZfcTwig/blob/master/src/ZfcTwig/Twig/FallbackFunction.php)
+Using ZF view helpers is supported through the [ZfcTwig\Twig\FallbackFunction](https://github.com/kokspflanze/ZfcTwig/blob/master/src/Twig/FallbackFunction.php)
 function.
 
 ```twig

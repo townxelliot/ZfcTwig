@@ -29,7 +29,7 @@ class TwigResolverTest extends TestCase
     }
 
     /**
-     * @expectedException \Twig_Error_Loader
+     * @expectedException \Twig\Error\LoaderError
      * @expectedExceptionMessage Template "key2" is not defined.
      */
     public function testResolveError()

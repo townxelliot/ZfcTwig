@@ -5,6 +5,7 @@ namespace ZfcTwig\Twig;
 use Interop\Container\ContainerInterface;
 use RuntimeException;
 use Twig\Environment;
+use Twig\TwigFunction;
 use Zend\ServiceManager\Factory\FactoryInterface;
 use ZfcTwig\ModuleOptions;
 use function sprintf;
@@ -40,7 +41,15 @@ class EnvironmentFactory implements FactoryInterface
             $env->registerUndefinedFunctionCallback(
                 function ($name) use ($helperPluginManager) {
                     if ($helperPluginManager->has($name)) {
-                        return new FallbackFunction($name);
+                        return new TwigFunction(
+                            $name,
+                            sprintf(
+                                '$this->env->getExtension("%s")->getRenderer()->plugin("%s")->__invoke',
+                                Extension::class,
+                                $name
+                            ),
+                            ['is_safe' => ['all']]
+                        );
                     }
                     return false;
                 }

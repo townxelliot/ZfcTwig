@@ -50,17 +50,8 @@ matrix:
     - php: 7.4
       env:
         - DEPS=latest
-    - php: nightly
-      env:
-        - DEPS=lowest
-    - php: nightly
-      env:
-        - DEPS=locked
-    - php: nightly
-      env:
-        - DEPS=latest
   allow_failures:
-    - php: nightly
+    - php: 7.4
 
 before_install:
   - travis_retry composer self-update

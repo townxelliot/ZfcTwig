@@ -17,7 +17,7 @@ class ModuleOptionsFactory implements FactoryInterface
     {
         $config = $container->get('config');
 
-        return new ModuleOptions(isset($config['zfctwig']) ? $config['zfctwig'] : []);
+        return new ModuleOptions($config['zfctwig'] ?? []);
     }
 
 }

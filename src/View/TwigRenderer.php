@@ -245,9 +245,7 @@ class TwigRenderer implements RendererInterface, TreeRendererInterface
         }
 
         if ($model && $this->canRenderTrees() && $model->hasChildren()) {
-            if (!isset($values['content'])) {
-                $values['content'] = '';
-            }
+            $values['content'] = $values['content'] ?? '';
             foreach ($model as $child) {
                 /** @var ModelInterface $child */
                 if ($this->canRender($child->getTemplate())) {

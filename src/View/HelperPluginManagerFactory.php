@@ -24,7 +24,7 @@ class HelperPluginManagerFactory implements FactoryInterface
         /** @var ModuleOptions $options */
         $options        = $container->get(ModuleOptions::class);
         $managerOptions = $options->getHelperManager();
-        $managerConfigs = isset($managerOptions['configs']) ? $managerOptions['configs'] : [];
+        $managerConfigs = $managerOptions['configs'] ?? [];
 
         /** @var HelperPluginManager $viewHelper */
         //$viewHelper = $container->get('ViewHelperManager');

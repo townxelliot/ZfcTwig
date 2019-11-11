@@ -23,7 +23,7 @@
         }
     ],
     "require": {
-        "php": "^7.2",
+        "php": "^7.2.9",
         "twig/twig": "3.x-dev",
         "zendframework/zend-mvc": "^3.0",
         "zendframework/zend-view": "^2.7",

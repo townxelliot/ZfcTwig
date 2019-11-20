@@ -67,6 +67,12 @@ class StackLoader extends Loader\FilesystemLoader
         // normalize name
         $name = preg_replace('#/{2,}#', '/', strtr($name, '\\', '/'));
 
+        // Ensure we have the expected file extension
+        $defaultSuffix = $this->getDefaultSuffix();
+        if (pathinfo($name, PATHINFO_EXTENSION) != $defaultSuffix) {
+            $name .= '.' . $defaultSuffix;
+        }
+
         if (isset($this->cache[$name])) {
             return $this->cache[$name];
         }
@@ -76,12 +82,6 @@ class StackLoader extends Loader\FilesystemLoader
                 return $this->cache[$name] = null;
             }
             throw new Error\LoaderError($this->errorCache[$name]);
-        }
-
-        // Ensure we have the expected file extension
-        $defaultSuffix = $this->getDefaultSuffix();
-        if (pathinfo($name, PATHINFO_EXTENSION) != $defaultSuffix) {
-            $name .= '.' . $defaultSuffix;
         }
 
         $this->validateName($name);

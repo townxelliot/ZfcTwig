@@ -60,7 +60,7 @@ class StackLoader extends Loader\FilesystemLoader
      * {@inheritDoc}
      * @throws Error\LoaderError
      */
-    protected function findTemplate(string $name, bool $throw = true): string
+    protected function findTemplate(string $name, bool $throw = true): ?string
     {
         $name  = (string)$name;
 
@@ -73,7 +73,7 @@ class StackLoader extends Loader\FilesystemLoader
 
         if (isset($this->errorCache[$name])) {
             if (!$throw) {
-                return false;
+                return $this->cache[$name] = null;
             }
             throw new Error\LoaderError($this->errorCache[$name]);
         }
@@ -95,7 +95,7 @@ class StackLoader extends Loader\FilesystemLoader
                 );
 
                 if (!$throw) {
-                    return false;
+                    return $this->cache[$name] = null;
                 }
 
                 throw new Error\LoaderError($this->errorCache[$name]);
@@ -110,7 +110,7 @@ class StackLoader extends Loader\FilesystemLoader
             $this->errorCache[$name] = sprintf('There are no registered paths for namespace "%s".', $namespace);
 
             if (!$throw) {
-                return false;
+                return $this->cache[$name] = null;
             }
             throw new Error\LoaderError($this->errorCache[$name]);
         }
@@ -131,7 +131,7 @@ class StackLoader extends Loader\FilesystemLoader
         );
 
         if (!$throw) {
-            return false;
+            return $this->cache[$name] = null;
         }
 
         throw new Error\LoaderError($this->errorCache[$name]);

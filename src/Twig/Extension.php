@@ -23,7 +23,7 @@ class Extension extends AbstractExtension
     /**
      * @return TwigRenderer
      */
-    public function getRenderer()
+    public function getRenderer(): TwigRenderer
     {
         return $this->renderer;
     }
@@ -33,7 +33,7 @@ class Extension extends AbstractExtension
      *
      * @return string The extension name
      */
-    public function getName()
+    public function getName(): string
     {
         return __CLASS__;
     }

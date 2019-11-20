@@ -38,7 +38,7 @@ class StackLoader extends Loader\FilesystemLoader
      *
      * @return StackLoader
      */
-    public function setDefaultSuffix($defaultSuffix)
+    public function setDefaultSuffix(string $defaultSuffix)
     {
         $this->defaultSuffix = (string)$defaultSuffix;
         $this->defaultSuffix = ltrim($this->defaultSuffix, '.');
@@ -51,7 +51,7 @@ class StackLoader extends Loader\FilesystemLoader
      *
      * @return string
      */
-    public function getDefaultSuffix()
+    public function getDefaultSuffix(): string
     {
         return $this->defaultSuffix;
     }
@@ -60,12 +60,18 @@ class StackLoader extends Loader\FilesystemLoader
      * {@inheritDoc}
      * @throws Error\LoaderError
      */
-    protected function findTemplate($name, $throw = true)
+    protected function findTemplate(string $name, bool $throw = true): ?string
     {
         $name  = (string)$name;
 
         // normalize name
         $name = preg_replace('#/{2,}#', '/', strtr($name, '\\', '/'));
+
+        // Ensure we have the expected file extension
+        $defaultSuffix = $this->getDefaultSuffix();
+        if (pathinfo($name, PATHINFO_EXTENSION) != $defaultSuffix) {
+            $name .= '.' . $defaultSuffix;
+        }
 
         if (isset($this->cache[$name])) {
             return $this->cache[$name];
@@ -73,15 +79,9 @@ class StackLoader extends Loader\FilesystemLoader
 
         if (isset($this->errorCache[$name])) {
             if (!$throw) {
-                return false;
+                return $this->cache[$name] = null;
             }
             throw new Error\LoaderError($this->errorCache[$name]);
-        }
-
-        // Ensure we have the expected file extension
-        $defaultSuffix = $this->getDefaultSuffix();
-        if (pathinfo($name, PATHINFO_EXTENSION) != $defaultSuffix) {
-            $name .= '.' . $defaultSuffix;
         }
 
         $this->validateName($name);
@@ -95,7 +95,7 @@ class StackLoader extends Loader\FilesystemLoader
                 );
 
                 if (!$throw) {
-                    return false;
+                    return $this->cache[$name] = null;
                 }
 
                 throw new Error\LoaderError($this->errorCache[$name]);
@@ -110,7 +110,7 @@ class StackLoader extends Loader\FilesystemLoader
             $this->errorCache[$name] = sprintf('There are no registered paths for namespace "%s".', $namespace);
 
             if (!$throw) {
-                return false;
+                return $this->cache[$name] = null;
             }
             throw new Error\LoaderError($this->errorCache[$name]);
         }
@@ -131,7 +131,7 @@ class StackLoader extends Loader\FilesystemLoader
         );
 
         if (!$throw) {
-            return false;
+            return $this->cache[$name] = null;
         }
 
         throw new Error\LoaderError($this->errorCache[$name]);
@@ -141,7 +141,7 @@ class StackLoader extends Loader\FilesystemLoader
      * @param string $name
      * @throws Error\LoaderError
      */
-    private function validateName($name)
+    private function validateName(string $name): void
     {
         if (false !== strpos($name, "\0")) {
             throw new Error\LoaderError('A template name cannot contain NUL bytes.');

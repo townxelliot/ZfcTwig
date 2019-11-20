@@ -9,12 +9,12 @@ class ModuleOptions extends AbstractOptions
     /**
      * @var string
      */
-    protected $environmentLoader;
+    protected $environmentLoader = '';
 
     /**
      * @var string
      */
-    protected $environmentClass;
+    protected $environmentClass = '';
 
     /**
      * @var array
@@ -39,7 +39,7 @@ class ModuleOptions extends AbstractOptions
     /**
      * @var string
      */
-    protected $suffix;
+    protected $suffix = '';
 
     /**
      * @var bool
@@ -58,9 +58,9 @@ class ModuleOptions extends AbstractOptions
 
     /**
      * @param boolean $disableZfmodel
-     * @return self
+     * @return $this
      */
-    public function setDisableZfmodel($disableZfmodel)
+    public function setDisableZfmodel(bool $disableZfmodel): self
     {
         $this->disableZfmodel = $disableZfmodel;
         return $this;
@@ -69,16 +69,16 @@ class ModuleOptions extends AbstractOptions
     /**
      * @return boolean
      */
-    public function getDisableZfmodel()
+    public function getDisableZfmodel(): bool
     {
         return $this->disableZfmodel;
     }
 
     /**
      * @param boolean $enableFallbackFunctions
-     * @return self
+     * @return $this
      */
-    public function setEnableFallbackFunctions($enableFallbackFunctions)
+    public function setEnableFallbackFunctions(bool $enableFallbackFunctions): self
     {
         $this->enableFallbackFunctions = $enableFallbackFunctions;
         return $this;
@@ -87,34 +87,34 @@ class ModuleOptions extends AbstractOptions
     /**
      * @return boolean
      */
-    public function getEnableFallbackFunctions()
+    public function getEnableFallbackFunctions(): bool
     {
         return $this->enableFallbackFunctions;
     }
 
     /**
-     * @param mixed $environmentLoader
-     * @return self
+     * @param string $environmentLoader
+     * @return $this
      */
-    public function setEnvironmentLoader($environmentLoader)
+    public function setEnvironmentLoader(string $environmentLoader): self
     {
         $this->environmentLoader = $environmentLoader;
         return $this;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getEnvironmentLoader()
+    public function getEnvironmentLoader(): string
     {
         return $this->environmentLoader;
     }
 
     /**
      * @param array $environmentOptions
-     * @return self
+     * @return $this
      */
-    public function setEnvironmentOptions($environmentOptions)
+    public function setEnvironmentOptions(array $environmentOptions): self
     {
         $this->environmentOptions = $environmentOptions;
         return $this;
@@ -123,16 +123,16 @@ class ModuleOptions extends AbstractOptions
     /**
      * @return array
      */
-    public function getEnvironmentOptions()
+    public function getEnvironmentOptions(): array
     {
         return $this->environmentOptions;
     }
 
     /**
      * @param array $extensions
-     * @return self
+     * @return $this
      */
-    public function setExtensions($extensions)
+    public function setExtensions($extensions): self
     {
         $this->extensions = $extensions;
         return $this;
@@ -141,16 +141,16 @@ class ModuleOptions extends AbstractOptions
     /**
      * @return array
      */
-    public function getExtensions()
+    public function getExtensions(): array
     {
         return $this->extensions;
     }
 
     /**
      * @param array $helperManager
-     * @return self
+     * @return $this
      */
-    public function setHelperManager($helperManager)
+    public function setHelperManager($helperManager): self
     {
         $this->helperManager = $helperManager;
         return $this;
@@ -159,16 +159,16 @@ class ModuleOptions extends AbstractOptions
     /**
      * @return array
      */
-    public function getHelperManager()
+    public function getHelperManager(): array
     {
         return $this->helperManager;
     }
 
     /**
      * @param array $loaderChain
-     * @return self
+     * @return $this
      */
-    public function setLoaderChain($loaderChain)
+    public function setLoaderChain(array $loaderChain): self
     {
         $this->loaderChain = $loaderChain;
         return $this;
@@ -177,16 +177,16 @@ class ModuleOptions extends AbstractOptions
     /**
      * @return array
      */
-    public function getLoaderChain()
+    public function getLoaderChain(): array
     {
         return $this->loaderChain;
     }
 
     /**
      * @param string $suffix
-     * @return self
+     * @return $this
      */
-    public function setSuffix($suffix)
+    public function setSuffix(string $suffix): self
     {
         $this->suffix = $suffix;
         return $this;
@@ -195,7 +195,7 @@ class ModuleOptions extends AbstractOptions
     /**
      * @return string
      */
-    public function getSuffix()
+    public function getSuffix(): string
     {
         return $this->suffix;
     }
@@ -203,7 +203,7 @@ class ModuleOptions extends AbstractOptions
     /**
      * @param string $environmentClass
      */
-    public function setEnvironmentClass($environmentClass)
+    public function setEnvironmentClass(string $environmentClass)
     {
         $this->environmentClass = $environmentClass;
     }
@@ -211,7 +211,7 @@ class ModuleOptions extends AbstractOptions
     /**
      * @return string
      */
-    public function getEnvironmentClass()
+    public function getEnvironmentClass(): string
     {
         return $this->environmentClass;
     }
@@ -219,7 +219,7 @@ class ModuleOptions extends AbstractOptions
     /**
      * @param array $globals
      */
-    public function setGlobals($globals)
+    public function setGlobals(array $globals)
     {
         $this->globals = $globals;
     }
@@ -227,7 +227,7 @@ class ModuleOptions extends AbstractOptions
     /**
      * @return array
      */
-    public function getGlobals()
+    public function getGlobals(): array
     {
         return $this->globals;
     }

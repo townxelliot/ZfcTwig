@@ -17,9 +17,8 @@ class Module implements
     /**
      * @param EventInterface $e
      * @throws InvalidArgumentException
-     * @return array
      */
-    public function onBootstrap(EventInterface $e)
+    public function onBootstrap(EventInterface $e): void
     {
         /** @var \Zend\Mvc\MvcEvent $e*/
         $application    = $e->getApplication();
@@ -51,7 +50,7 @@ class Module implements
     /**
      * @return array
      */
-    public function getConfig()
+    public function getConfig(): array
     {
         return include __DIR__ . '/../config/module.config.php';
     }

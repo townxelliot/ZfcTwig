@@ -41,8 +41,6 @@ matrix:
     - php: 7.4
       env:
         - DEPS=latest
-  allow_failures:
-    - php: 7.4
 
 before_install:
   - travis_retry composer self-update

@@ -4,7 +4,7 @@ namespace ZfcTwig\View;
 
 use Interop\Container\ContainerInterface;
 use Twig\Environment;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class TwigResolverFactory implements FactoryInterface
 {

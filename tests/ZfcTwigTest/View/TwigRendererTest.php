@@ -4,8 +4,8 @@ namespace ZfcTwigTest\View;
 
 use Twig\Environment;
 use Twig\Loader;
-use Zend\View\Model\ModelInterface;
-use Zend\View\View;
+use Laminas\View\Model\ModelInterface;
+use Laminas\View\View;
 use ZfcTwig\View\TwigRenderer;
 use PHPUnit\Framework\TestCase;
 use ZfcTwig\View\TwigResolver;

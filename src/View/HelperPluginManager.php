@@ -2,10 +2,10 @@
 
 namespace ZfcTwig\View;
 
-use Zend\Mvc\Plugin\FlashMessenger;
-use Zend\ServiceManager\Factory\InvokableFactory;
-use Zend\View\Helper;
-use Zend\View\HelperPluginManager as ZendHelperPluginManager;
+use Laminas\Mvc\Plugin\FlashMessenger;
+use Laminas\ServiceManager\Factory\InvokableFactory;
+use Laminas\View\Helper;
+use Laminas\View\HelperPluginManager as ZendHelperPluginManager;
 
 class HelperPluginManager extends ZendHelperPluginManager
 {

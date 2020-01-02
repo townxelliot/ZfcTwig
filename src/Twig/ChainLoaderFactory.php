@@ -5,7 +5,7 @@ namespace ZfcTwig\Twig;
 use Interop\Container\ContainerInterface;
 use InvalidArgumentException;
 use Twig\Loader;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 use ZfcTwig\ModuleOptions;
 use function is_string;
 

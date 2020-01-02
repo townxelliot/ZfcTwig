@@ -2,9 +2,9 @@
 
 namespace ZfcTwig\View;
 
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
-use Zend\View\ViewEvent;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\ListenerAggregateInterface;
+use Laminas\View\ViewEvent;
 
 class TwigStrategy implements ListenerAggregateInterface
 {
@@ -71,7 +71,7 @@ class TwigStrategy implements ListenerAggregateInterface
     /**
      * Inject the response from the renderer.
      *
-     * @param \Zend\View\ViewEvent $e
+     * @param \Laminas\View\ViewEvent $e
      */
     public function injectResponse(ViewEvent $e)
     {

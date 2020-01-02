@@ -3,9 +3,9 @@
 namespace ZfcTwig\View;
 
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\ConfigInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
-use Zend\View\Exception;
+use Laminas\ServiceManager\ConfigInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
+use Laminas\View\Exception;
 use ZfcTwig\ModuleOptions;
 use function is_string;
 use function class_exists;

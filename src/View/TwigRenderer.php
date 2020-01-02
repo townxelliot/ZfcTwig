@@ -4,13 +4,13 @@ namespace ZfcTwig\View;
 
 use Twig\Environment;
 use Twig\Loader;
-use Zend\View\Exception;
-use Zend\View\HelperPluginManager;
-use Zend\View\Model\ModelInterface;
-use Zend\View\Renderer\RendererInterface;
-use Zend\View\Renderer\TreeRendererInterface;
-use Zend\View\Resolver\ResolverInterface;
-use Zend\View\View;
+use Laminas\View\Exception;
+use Laminas\View\HelperPluginManager;
+use Laminas\View\Model\ModelInterface;
+use Laminas\View\Renderer\RendererInterface;
+use Laminas\View\Renderer\TreeRendererInterface;
+use Laminas\View\Resolver\ResolverInterface;
+use Laminas\View\View;
 use function is_callable;
 use function call_user_func_array;
 use function sprintf;
@@ -48,7 +48,7 @@ class TwigRenderer implements RendererInterface, TreeRendererInterface
     protected $resolver;
 
     /**
-     * @var \Zend\View\View
+     * @var \Laminas\View\View
      */
     protected $view;
 
@@ -122,7 +122,7 @@ class TwigRenderer implements RendererInterface, TreeRendererInterface
      *
      * @param  string     $name Name of plugin to return
      * @param  null|array $options Options to pass to plugin constructor (if not already instantiated)
-     * @return \Zend\View\Helper\AbstractHelper
+     * @return \Laminas\View\Helper\AbstractHelper
      */
     public function plugin(string $name, array $options = null)
     {
@@ -217,7 +217,7 @@ class TwigRenderer implements RendererInterface, TreeRendererInterface
      * @param  string|ModelInterface   $nameOrModel The script/resource process, or a view model
      * @param  null|array|\ArrayAccess $values      Values to use during rendering
      * @return string|null The script output.
-     * @throws \Zend\View\Exception\DomainException
+     * @throws \Laminas\View\Exception\DomainException
      */
     public function render($nameOrModel, $values = null): ?string
     {

@@ -1,12 +1,12 @@
-# ZfcTwig Module for Zend Framework [![Build Status](https://travis-ci.org/kokspflanze/ZfcTwig.svg?branch=master)](https://travis-ci.org/kokspflanze/ZfcTwig)
+# ZfcTwig Module for Laminas/Zend Framework [![Build Status](https://travis-ci.org/kokspflanze/ZfcTwig.svg?branch=master)](https://travis-ci.org/kokspflanze/ZfcTwig)
 
 ZfcTwig is a module that integrates the [Twig](http://twig.sensiolabs.org) templating engine with
-[Zend Framework](https://framework.zend.com).
+[Laminas](https://getlaminas.org/) / [Zend Framework](https://framework.zend.com).
 
 ## Information
 
 this is a fork of [ZF-Commons/ZfcTwig](https://github.com/ZF-Commons/ZfcTwig).
-I added ZF3 support, so the module works with Zend Framework 2 and 3.
+I added ZF3 support, so the module works with Laminas / Zend Framework 2 and 3.
 If you found a bug, please report it, just pm me in [gitter](https://gitter.im/kokspflanze) or open a PullRequest.
 
 ## Installation
@@ -99,7 +99,7 @@ folder.
 ## Gotchas
 
 ZF does not support multiple renderers with view helpers very well. As a workaround, ZfcTwig registers its own
-`HelperPluginManager` that extends the default `Zend\View\HelperPluginManager` and adds the default as a peering manager.
+`HelperPluginManager` that extends the default `Laminas\View\HelperPluginManager` and adds the default as a peering manager.
 This let's ZfcTwig register its own renderer with view helpers that require it and fallback to the default manager for
 view helpers that do not require one.
 

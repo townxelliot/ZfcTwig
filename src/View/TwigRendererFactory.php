@@ -5,8 +5,8 @@ namespace ZfcTwig\View;
 use Interop\Container\ContainerInterface;
 use Twig\Environment;
 use Twig\Loader\ChainLoader;
-use Zend\ServiceManager\Factory\FactoryInterface;
-use Zend\View\View;
+use LaminiasServiceManager\Factory\FactoryInterface;
+use Laminas\View\View;
 use ZfcTwig\ModuleOptions;
 
 class TwigRendererFactory implements FactoryInterface

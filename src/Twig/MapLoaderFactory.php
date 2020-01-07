@@ -3,7 +3,7 @@
 namespace ZfcTwig\Twig;
 
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 use ZfcTwig\ModuleOptions;
 use function pathinfo;
 
@@ -21,7 +21,7 @@ class MapLoaderFactory implements FactoryInterface
         /** @var ModuleOptions $options */
         $options = $container->get(ModuleOptions::class);
 
-        /** @var \Zend\View\Resolver\TemplateMapResolver */
+        /** @var \Laminas\View\Resolver\TemplateMapResolver */
         $zfTemplateMap = $container->get('ViewTemplateMapResolver');
 
         $templateMap = new MapLoader();

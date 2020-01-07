@@ -1,7 +1,7 @@
 <?php
 
 use Twig\Environment;
-use Zend\Navigation\View\HelperConfig;
+use Laminas\Navigation\View\HelperConfig;
 use ZfcTwig\Twig;
 use ZfcTwig\View;
 

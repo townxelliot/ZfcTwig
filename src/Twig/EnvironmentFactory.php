@@ -6,7 +6,7 @@ use Interop\Container\ContainerInterface;
 use RuntimeException;
 use Twig\Environment;
 use Twig\TwigFunction;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 use ZfcTwig\ModuleOptions;
 use function sprintf;
 

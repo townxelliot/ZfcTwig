@@ -4,9 +4,9 @@ namespace ZfcTwig;
 
 use InvalidArgumentException;
 use Twig\Environment;
-use Zend\EventManager\EventInterface;
-use Zend\ModuleManager\Feature\BootstrapListenerInterface;
-use Zend\ModuleManager\Feature\ConfigProviderInterface;
+use Laminas\EventManager\EventInterface;
+use Laminas\ModuleManager\Feature\BootstrapListenerInterface;
+use Laminas\ModuleManager\Feature\ConfigProviderInterface;
 use function is_string;
 use function is_object;
 
@@ -20,7 +20,7 @@ class Module implements
      */
     public function onBootstrap(EventInterface $e): void
     {
-        /** @var \Zend\Mvc\MvcEvent $e*/
+        /** @var \Laminas\Mvc\MvcEvent $e*/
         $application    = $e->getApplication();
         $serviceManager = $application->getServiceManager();
         $environment    = $serviceManager->get(Environment::class);

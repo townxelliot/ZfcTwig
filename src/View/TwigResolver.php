@@ -3,8 +3,8 @@
 namespace ZfcTwig\View;
 
 use Twig\Environment;
-use Zend\View\Resolver\ResolverInterface;
-use Zend\View\Renderer\RendererInterface as Renderer;
+use Laminas\View\Resolver\ResolverInterface;
+use Laminas\View\Renderer\RendererInterface as Renderer;
 
 class TwigResolver implements ResolverInterface
 {

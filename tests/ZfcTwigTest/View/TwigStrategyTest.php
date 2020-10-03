@@ -34,8 +34,7 @@ class TwigStrategyTest extends TestCase
     {
         /** @var \PHPUnit\Framework\MockObject\MockObject|ModelInterface $model */
         $model = $this->getMockBuilder(ModelInterface::class)->getMock();
-        $model->expects($this->at(0))
-              ->method('getTemplate')
+        $model->method('getTemplate')
               ->willReturn('key1');
 
         $event = new ViewEvent;

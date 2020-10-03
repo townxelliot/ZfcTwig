@@ -46,7 +46,7 @@
     "require-dev": {
         "laminas/laminas-navigation": "^2.7",
         "laminas/laminas-modulemanager": "^2.7",
-        "phpunit/phpunit": "^8.4.3"
+        "phpunit/phpunit": "^8.5.1 || ^9.3"
     },
     "replace": {
         "zf-commons/zfc-twig": "self.version"
@@ -57,8 +57,7 @@
         },
         "branch-alias": {
             "dev-release/1.4": "1.4-dev",
-            "dev-master": "3.x-dev",
-            "dev-develop": "4.x-dev"
+            "dev-master": "4.x-dev"
         }
     },
     "scripts": {
